@@ -1,0 +1,54 @@
+package com.openclassrooms.mddapi.controllers;
+
+import java.text.ParseException;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.openclassrooms.mddapi.model.dto.UserLoginDto;
+import com.openclassrooms.mddapi.model.dto.UserRegisterDto;
+import com.openclassrooms.mddapi.model.responses.simpleToken;
+import com.openclassrooms.mddapi.services.UserService;
+
+@RestController
+@RequestMapping("/api")
+public class userController {
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/auth/register")
+    public ResponseEntity<?> userRegister(@RequestBody UserRegisterDto userRegisterDto){
+        String token = userService.register(userRegisterDto);
+
+        if(token.isEmpty())
+            return ResponseEntity.badRequest().body("Username already exist !");
+
+        return ResponseEntity.ok().body(new simpleToken(token));
+    }
+
+    @PostMapping("/auth/login")
+    public ResponseEntity<?> userlogin(@RequestBody UserLoginDto userLoginDto){
+        String token = userService.login(userLoginDto);
+
+        if(token.isEmpty())
+            return ResponseEntity.badRequest().body("Username or Password in invalid !");
+
+        return ResponseEntity.ok().body(new simpleToken(token));
+    }
+
+    @GetMapping("/auth/me")
+    public ResponseEntity<?> getMe() throws ParseException{
+        return ResponseEntity.ok().body(userService.getMe());
+    }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<?> getUserDtoById(@PathVariable String id) throws NumberFormatException, ParseException {
+        return ResponseEntity.ok().body(userService.getUserDtoById(id));
+    }   
+}

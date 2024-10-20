@@ -1,6 +1,9 @@
 package com.openclassrooms.mddapi.model;
 
 import jakarta.persistence.Id;
+
+import com.openclassrooms.mddapi.model.dto.UserDto;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,5 +47,11 @@ public class UserEntity {
         this.email = email;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt; 
+    }
+
+    public UserDto ToUserDto(){
+        return new UserDto(this.getId(),
+                                    this.getName(),
+                                    this.getEmail());
     }
 }
