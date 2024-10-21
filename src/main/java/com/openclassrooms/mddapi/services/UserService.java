@@ -10,8 +10,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.openclassrooms.mddapi.model.UserEntity;
 import com.openclassrooms.mddapi.model.dto.UserDto;
-import com.openclassrooms.mddapi.model.dto.UserLoginDto;
-import com.openclassrooms.mddapi.model.dto.UserRegisterDto;
+import com.openclassrooms.mddapi.model.dto.UserRegisterAndLoginDto;
 import com.openclassrooms.mddapi.repository.UserRepository;
 
 @Service
@@ -34,7 +33,7 @@ public class UserService {
      * @param userRegisterDto a user to register
      * @return UserEntity the created user
      */
-    public UserEntity createUser(UserRegisterDto userRegisterDto){
+    public UserEntity createUser(UserRegisterAndLoginDto userRegisterDto){
         UserEntity userToAdd = new UserEntity(  userRegisterDto.getPseudo(),
                                         userRegisterDto.getEmail(),
                                         new TimeService().getTime());
@@ -64,7 +63,7 @@ public class UserService {
      * @param userRegisterDto user to register
      * @return the generated token for user
      */
-    public String register(UserRegisterDto userRegisterDto) {
+    public String register(UserRegisterAndLoginDto userRegisterDto) {
         if(userRepository.existsByEmail(userRegisterDto.getEmail())){
             return "";
         }
@@ -79,7 +78,7 @@ public class UserService {
      * @param userLoginDto user to authenticate
      * @return a new token for user
      */
-    public String login(UserLoginDto userLoginDto) {
+    public String login(UserRegisterAndLoginDto userLoginDto) {
         try {
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userLoginDto.getEmail(), userLoginDto.getPassword()));
 

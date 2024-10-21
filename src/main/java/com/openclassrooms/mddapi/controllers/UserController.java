@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.openclassrooms.mddapi.model.dto.UserLoginDto;
-import com.openclassrooms.mddapi.model.dto.UserRegisterDto;
+import com.openclassrooms.mddapi.model.dto.UserRegisterAndLoginDto;
 import com.openclassrooms.mddapi.model.responses.simpleToken;
 import com.openclassrooms.mddapi.services.UserService;
 
@@ -23,7 +21,7 @@ public class UserController {
     private UserService userService;
 
     @PostMapping("/auth/register")
-    public ResponseEntity<?> userRegister(@RequestBody UserRegisterDto userRegisterDto){
+    public ResponseEntity<?> userRegister(@RequestBody UserRegisterAndLoginDto userRegisterDto){
         String token = userService.register(userRegisterDto);
 
         if(token.isEmpty())
@@ -33,7 +31,7 @@ public class UserController {
     }
 
     @PostMapping("/auth/login")
-    public ResponseEntity<?> userlogin(@RequestBody UserLoginDto userLoginDto){
+    public ResponseEntity<?> userlogin(@RequestBody UserRegisterAndLoginDto userLoginDto){
         String token = userService.login(userLoginDto);
 
         if(token.isEmpty())
