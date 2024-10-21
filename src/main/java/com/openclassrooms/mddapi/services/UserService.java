@@ -35,8 +35,7 @@ public class UserService {
      * @return UserEntity the created user
      */
     public UserEntity createUser(UserRegisterDto userRegisterDto){
-        UserEntity userToAdd = new UserEntity(  userRegisterDto.getFirstName(),
-                                        userRegisterDto.getLastName(),
+        UserEntity userToAdd = new UserEntity(  userRegisterDto.getPseudo(),
                                         userRegisterDto.getEmail(),
                                         new TimeService().getTime());
                                         
