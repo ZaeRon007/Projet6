@@ -5,15 +5,17 @@ import lombok.Data;
 @Data
 public class UserDto {
     int id;
-    String name;
+    String firstName;
+    String lastName;
     String email;
 
     public UserDto(){
     }
 
-    public UserDto(int id, String name, String email){
+    public UserDto(int id, String firstName, String lastName, String email){
         this.id = id;
-        this.name = name;
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.email = email;
     }
 }

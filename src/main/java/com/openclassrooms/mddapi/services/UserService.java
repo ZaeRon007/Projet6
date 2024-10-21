@@ -35,9 +35,9 @@ public class UserService {
      * @return UserEntity the created user
      */
     public UserEntity createUser(UserRegisterDto userRegisterDto){
-        UserEntity userToAdd = new UserEntity(  userRegisterDto.getName(),
+        UserEntity userToAdd = new UserEntity(  userRegisterDto.getFirstName(),
+                                        userRegisterDto.getLastName(),
                                         userRegisterDto.getEmail(),
-                                        new TimeService().getTime(),
                                         new TimeService().getTime());
                                         
         userToAdd.setPassword(PasswordEncoder.encode(userRegisterDto.getPassword()));
