@@ -14,7 +14,7 @@ import com.openclassrooms.mddapi.repository.UserRepository;
 public class CustomUserDetailsService implements UserDetailsService {
     
     @Autowired
-    UserRepository DBUserRepository;
+    UserRepository userRepository;
 
     /**
      * load a user from database by it's email
@@ -23,7 +23,7 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
-        UserEntity user = DBUserRepository.findByEmail(email);
+        UserEntity user = userRepository.findByEmail(email);
 
         if(user == null){
             throw new UsernameNotFoundException("User not found with username: " + email);
