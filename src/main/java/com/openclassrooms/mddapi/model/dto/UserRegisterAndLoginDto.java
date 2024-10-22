@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class UserRegisterAndLoginDto {
-    String pseudo;
+    String name;
     String email;
     String password;
 }
