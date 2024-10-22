@@ -1,7 +1,6 @@
 package com.openclassrooms.mddapi.model;
 
 import jakarta.persistence.Id;
-import java.sql.Date;
 import com.openclassrooms.mddapi.model.dto.UserDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
 
 @Data
 @Entity
@@ -18,7 +16,7 @@ import lombok.RequiredArgsConstructor;
     @UniqueConstraint(columnNames = "email"),
     @UniqueConstraint(columnNames = "name")
 })
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class UserEntity {
 
     @Id
@@ -36,10 +34,16 @@ public class UserEntity {
     private String password;
 
     @Column(name = "created_at")
-    private Date createdAt;
+    private String createdAt;
     
     @Column(name = "updated_at")
     private String updatedAt;
+
+    public UserEntity(String name,String email, String date){
+        this.name = name;
+        this.email = email;
+        this.createdAt = date;
+    }
 
     public UserDto ToUserDto(){
         return new UserDto(this.getId(),
