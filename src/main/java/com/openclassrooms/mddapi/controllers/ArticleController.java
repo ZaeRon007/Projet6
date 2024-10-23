@@ -46,7 +46,7 @@ public class ArticleController {
 
     @PostMapping("/unsubscribe/{id}")
     public ResponseEntity<?> unsubscribeToArticle(@PathVariable String id){
-        articleService.subscribeToArticle(id);
+        articleService.unsubscribeToArticle(id);
         return ResponseEntity.ok().body(null);
     }
 }
