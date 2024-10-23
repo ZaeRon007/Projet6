@@ -1,6 +1,9 @@
 package com.openclassrooms.mddapi.model;
 
 import jakarta.persistence.Id;
+
+import java.util.List;
+
 import com.openclassrooms.mddapi.model.dto.UserDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -37,6 +40,9 @@ public class UserEntity {
     
     @Column(name = "updated_at")
     private String updatedAt;
+
+    @Column(name = "subscribeList")
+    private List<Integer> subscribes;
 
     public UserEntity(String name,String email, String date){
         this.name = name;
