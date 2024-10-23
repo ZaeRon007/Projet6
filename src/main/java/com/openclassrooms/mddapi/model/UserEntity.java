@@ -16,7 +16,6 @@ import lombok.Data;
     @UniqueConstraint(columnNames = "email"),
     @UniqueConstraint(columnNames = "name")
 })
-// @RequiredArgsConstructor
 public class UserEntity {
 
     @Id

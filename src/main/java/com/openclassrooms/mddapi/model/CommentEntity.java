@@ -5,8 +5,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -25,11 +23,9 @@ public class CommentEntity {
     @Column(name = "content", length = 2000)
     private String content;
 
-    @OneToOne//pourquoi ? 
-    @JoinColumn(name = "USER_id", referencedColumnName = "id")//comment savoir pour les deux champs renseignés ? 
+    @Column(name = "userId")
     private int userId;
 
-    @OneToOne//pourquoi ? 
-    @JoinColumn(name = "ARTICLE_id", referencedColumnName = "id")//comment savoir pour les deux champs renseignés ? 
+    @Column(name = "articleId")
     private int articleId;
 }
