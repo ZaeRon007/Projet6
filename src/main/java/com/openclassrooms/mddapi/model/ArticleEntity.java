@@ -35,5 +35,11 @@ public class ArticleEntity {
     private int userId;
 
     @Column(name = "commentList")
-    private ArrayList<Integer> commentList;//list
+    private ArrayList<Integer> commentList;
+
+    public ArticleEntity(String titre, int themeId, String content){
+        this.titre = titre;
+        this.themeId = themeId;
+        this.content = content;
+    }
 }
