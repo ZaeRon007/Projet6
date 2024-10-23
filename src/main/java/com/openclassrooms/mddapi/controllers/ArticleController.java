@@ -32,4 +32,21 @@ public class ArticleController {
     public ResponseEntity<?> getArticles(){
         return ResponseEntity.ok().body(articleService.getAllArticles());
     }
+
+    @GetMapping("/subscribes")
+    public ResponseEntity<?> getAllSubscribes(){
+        return ResponseEntity.ok().body(articleService.getAllSubscribes());
+    }
+
+    @PostMapping("/subscribe/{id}")
+    public ResponseEntity<?> subscribeToArticle(@PathVariable String id){
+        articleService.subscribeToArticle(id);
+        return ResponseEntity.ok().body(null);
+    }
+
+    @PostMapping("/unsubscribe/{id}")
+    public ResponseEntity<?> unsubscribeToArticle(@PathVariable String id){
+        articleService.subscribeToArticle(id);
+        return ResponseEntity.ok().body(null);
+    }
 }
