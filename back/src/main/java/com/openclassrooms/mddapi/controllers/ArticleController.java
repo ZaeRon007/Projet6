@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.controllers;
 
+import java.text.ParseException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +25,7 @@ public class ArticleController {
     }
 
     @PostMapping("/article")
-    public ResponseEntity<?> createArticle(ArticleDto article){
+    public ResponseEntity<?> createArticle(ArticleDto article) throws ParseException{
         return ResponseEntity.ok().body(articleService.createArticle(article));
     }
 

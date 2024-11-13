@@ -1,5 +1,6 @@
 package com.openclassrooms.mddapi.services;
 
+import java.text.ParseException;
 import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,10 +14,16 @@ public class ArticleService {
     @Autowired
     private ArticleRepository articleRepository;
 
-    public ArticleEntity createArticle(ArticleDto article) {
+    @Autowired
+    private UserService userService;
+
+    public ArticleEntity createArticle(ArticleDto article) throws ParseException {
+        int userId = userService.getMe().getId();
+        
         ArticleEntity articleToSave = new ArticleEntity(article.getTitle(),
                                                         article.getThemeId(),
-                                                        article.getContent());
+                                                        article.getContent(),
+                                                        userId);
         articleRepository.save(articleToSave);
         return articleToSave;
     }

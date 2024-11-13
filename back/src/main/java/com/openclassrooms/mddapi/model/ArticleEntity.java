@@ -33,9 +33,10 @@ public class ArticleEntity {
     @Column(name = "user_id")
     private int userId;
 
-    public ArticleEntity(String title, int themeId, String content){
+    public ArticleEntity(String title, int themeId, String content, int userId){
         this.title = title;
         this.themeId = themeId;
         this.content = content;
+        this.userId = userId;
     }
 }
