@@ -4,9 +4,9 @@
 <form [formGroup]="monFormulaire" (ngSubmit)="onSubmit()" class="center">
 
     <mat-form-field>
-      <mat-select placeholder="options" formControlName="options" (click)="onClick()">
-        <mat-option *ngFor="let option of options" [value]="options">
-          {{ option }}
+      <mat-select placeholder="options" formControlName="options">
+        <mat-option *ngFor="let option of options" [value]="option">
+          {{ option.name }}
         </mat-option>
       </mat-select>
       <mat-error *ngIf="monFormulaire.get('options')?.hasError('required')">
