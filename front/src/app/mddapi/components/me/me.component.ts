@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { user } from 'src/app/core/interface/user.interface';
+import { userEntity } from 'src/app/core/interface/userEntity';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { environment } from 'src/environments/environment.prod';
 
@@ -14,7 +14,7 @@ export class MeComponent implements OnInit {
   private apiUrl = environment.baseUrl;
   
   monFormulaire!: FormGroup;
-  user!: user;
+  user!: userEntity;
   
   constructor(private formBuilder: FormBuilder,
               private http: HttpClient,
@@ -31,8 +31,8 @@ export class MeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.http.get<user>(`${this.apiUrl}auth/me`).subscribe((response : user) => {
-      this.user = response as user;
+    this.http.get<userEntity>(`${this.apiUrl}auth/me`).subscribe((response : userEntity) => {
+      this.user = response as userEntity;
       this.monFormulaire = this.formBuilder.group({
         username: [this.user.name, [Validators.required]],
         email: [this.user.email, Validators.required, Validators.email],
@@ -41,7 +41,7 @@ export class MeComponent implements OnInit {
   }
 
   onSubmit():void {
-    this.http.put<user>(`${this.apiUrl}profile/me`, this.user).subscribe();
+    this.http.put<userEntity>(`${this.apiUrl}profile/me`, this.user).subscribe();
   }
 
   logOut(): void {
