@@ -1,7 +1,7 @@
-import { theme } from "./theme.interface";
+import { themeEntity } from "./themeEntity";
 
-export interface Article {
-    theme: theme;
+export interface ArticleEntity {
+    themeId: number;
     titre: string;
     content: string;
 }
