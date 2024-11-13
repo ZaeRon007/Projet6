@@ -1,0 +1,15 @@
+<app-header></app-header>
+<h1 class="center">Se connecter</h1>
+
+<form (ngSubmit)="onSubmit()" class="center">
+
+    <label for="name">E-mail ou nom d'utilisateur</label>
+    <input type="name" id="nameInput" [(ngModel)]="name" name="name">
+    
+    <label for="password">Mot de passe</label>
+    <input type="password" id="passwordInput" [(ngModel)]="password" name="password">
+    
+    <button type="submit" color="primary">Se connecter</button>
+</form>
+
+

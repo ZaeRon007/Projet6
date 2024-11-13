@@ -1,0 +1,36 @@
+<app-header></app-header>
+<h1 class="center">Créer un nouvel article</h1>
+
+<form [formGroup]="monFormulaire" (ngSubmit)="onSubmit()" class="center">
+
+    <mat-form-field>
+      <mat-select placeholder="options" formControlName="options" (click)="onClick()">
+        <mat-option *ngFor="let option of options" [value]="options">
+          {{ option }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="monFormulaire.get('options')?.hasError('required')">
+        Le thème est requis
+      </mat-error>
+    </mat-form-field>
+    
+    <mat-form-field>
+      <input matInput placeholder="title" formControlName="title">
+      <mat-error *ngIf="monFormulaire.get('title')?.hasError('required')">
+        Le titre est requis
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="content" formControlName="content">
+      <mat-error *ngIf="monFormulaire.get('content')?.hasError('required')">
+        Le contenu est requis
+      </mat-error>
+    </mat-form-field>
+
+
+    <button mat-raised-button color="primary" type="submit" 
+          [disabled]="monFormulaire.invalid">
+          Créer
+  </button>
+</form>

@@ -1,0 +1,24 @@
+<app-header></app-header>
+<h1 class="center">Profil utilisateur</h1>
+
+<form [formGroup]="monFormulaire" (ngSubmit)="onSubmit()" class="center">
+    
+    <mat-form-field>
+      <input matInput placeholder="username" formControlName="username">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput placeholder="email" formControlName="email">
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" 
+          [disabled]="monFormulaire.invalid">
+          Sauvegarder
+    </button>
+
+</form>
+<div class="center">
+    <button type="submit" (click)="logOut()">
+          Se déconnecter
+    </button>
+</div>

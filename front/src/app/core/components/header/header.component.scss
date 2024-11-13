@@ -1,0 +1,27 @@
+.leftSide {
+    display: flex;
+    justify-content: left;
+}
+
+.rightSide {
+    display: flex;
+    align-items: center; // vertical alignement
+    justify-content: flex-end;
+}
+
+.mdd_logo {
+    height: 80px;
+    width: 120px;
+}
+
+.account_logo {
+    margin-top: 12px;
+    height: 50px;
+    width: 50px;
+}
+
+.gap {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+  
