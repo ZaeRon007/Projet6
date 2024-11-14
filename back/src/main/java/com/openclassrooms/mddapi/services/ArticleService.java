@@ -19,7 +19,6 @@ public class ArticleService {
 
     public ArticleEntity createArticle(ArticleDto article) throws ParseException {
         int userId = userService.getMe().getId();
-        
         ArticleEntity articleToSave = new ArticleEntity(article.getTitle(),
                                                         article.getThemeId(),
                                                         article.getContent(),
