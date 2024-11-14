@@ -49,7 +49,7 @@ public class UserController {
     }
     
     @PutMapping("/profile/me")
-    public ResponseEntity<?> putUser(@PathVariable UserDto user) throws ParseException{
+    public ResponseEntity<?> putUser(@RequestBody UserDto user) throws ParseException{
         return ResponseEntity.ok().body(userService.putUser(user));
     }
     

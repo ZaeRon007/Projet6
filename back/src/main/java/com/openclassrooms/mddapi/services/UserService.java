@@ -120,9 +120,13 @@ public class UserService {
         return userRepository.findById(Integer.parseInt(id)).ToUserDto();
     }
 
+    /**
+     * update user in database with request user
+     * @param userDto
+     * @return userDto
+     * @throws ParseException
+     */
     public UserDto putUser(UserDto userDto) throws ParseException {
-        int id = getMe().getId();
-        userDto.setId(id);
         return userRepository.save(userDto.toUserEntity()).ToUserDto();
     }
     
