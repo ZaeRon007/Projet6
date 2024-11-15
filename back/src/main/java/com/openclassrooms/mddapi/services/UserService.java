@@ -127,7 +127,10 @@ public class UserService {
      * @throws ParseException
      */
     public UserDto putUser(UserDto userDto) throws ParseException {
-        return userRepository.save(userDto.toUserEntity()).ToUserDto();
+        UserEntity userEntity = userRepository.findById(userDto.getId());
+        userEntity.setEmail(userDto.getEmail());
+        userEntity.setName(userDto.getName());
+        return userRepository.save(userEntity).ToUserDto();
     }
     
 }
