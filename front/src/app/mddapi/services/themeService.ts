@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
-import { themeEntity } from "src/app/core/interface/themeEntity";
+import { themeEntity } from "src/app/core/models/themeEntity";
 import { environment } from "src/environments/environment.prod";
 
 @Injectable({
