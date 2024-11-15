@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { AuthRequest } from 'src/app/core/interface/auth.interface';
+import { AuthRequest } from 'src/app/core/models/auth.interface';
 import { environment } from 'src/environments/environment.prod';
 
 

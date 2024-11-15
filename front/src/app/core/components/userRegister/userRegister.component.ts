@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { AuthRequest } from 'src/app/core/interface/auth.interface';
+import { AuthRequest } from 'src/app/core/models/auth.interface';
 import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { environment } from 'src/environments/environment.prod';
 import { Router } from '@angular/router';
