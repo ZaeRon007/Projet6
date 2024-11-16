@@ -1,4 +1,4 @@
-export interface userEntity {
-    name: string;
-    email: string;
+export class userEntity {
+    name!: string;
+    email!: string;
 }
