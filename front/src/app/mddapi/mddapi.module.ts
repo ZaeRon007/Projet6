@@ -10,6 +10,8 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MeComponent } from './components/me/me.component';
 import { ThemesComponent } from './components/themes/themes.component';
+import { MatGridListModule } from '@angular/material/grid-list'
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
@@ -26,6 +28,8 @@ import { ThemesComponent } from './components/themes/themes.component';
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
+    MatGridListModule,
+    MatCardModule,
   ],
 })
 export class MddapiModule { 
