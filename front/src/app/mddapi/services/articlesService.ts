@@ -1,15 +1,15 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { BehaviorSubject, Observable, tap } from "rxjs";
-import { themeEntity } from "src/app/core/models/themeEntity";
+import { ArticleEntity } from "src/app/core/models/articleEntity";
 import { environment } from "src/environments/environment.prod";
 
 @Injectable({
     providedIn: 'root'
 })
-export class ThemeService implements OnInit{
+export class ArticleService implements OnInit{
     private apiUrl = environment.baseUrl;
-    private theme$ = new BehaviorSubject<themeEntity[]>([new themeEntity]);
+    private article$ = new BehaviorSubject<ArticleEntity[]>([new ArticleEntity]);
 
     constructor(private http: HttpClient){}
 
@@ -17,8 +17,8 @@ export class ThemeService implements OnInit{
         this.fetch();
     }
 
-    public fetch(): Observable<themeEntity[]> {
-        return this.http.get<themeEntity[]>(`${this.apiUrl}themes`).pipe(
-            tap(themes => this.theme$.next(themes)));
+    public fetch(): Observable<ArticleEntity[]> {
+        return this.http.get<ArticleEntity[]>(`${this.apiUrl}articles`).pipe(
+            tap(articles => this.article$.next(articles)));
     }
 }
