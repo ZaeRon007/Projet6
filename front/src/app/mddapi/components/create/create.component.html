@@ -1,10 +1,10 @@
 <app-header></app-header>
-<h1 class="center">Créer un nouvel article</h1>
+<!-- <h1 class="center">Créer un nouvel article</h1>
 
 <form [formGroup]="monFormulaire" (ngSubmit)="onSubmit()" class="center">
 
     <mat-form-field>
-      <mat-select placeholder="options" formControlName="options">
+      <mat-select placeholder="options" formControlName="options" [(ngModel)]="selectedOption">
         <mat-option *ngFor="let option of options" [value]="option">
           {{ option.name }}
         </mat-option>
@@ -15,14 +15,14 @@
     </mat-form-field>
     
     <mat-form-field>
-      <input matInput placeholder="title" formControlName="title">
+      <input matInput placeholder="title" formControlName="title" [(ngModel)]="title">
       <mat-error *ngIf="monFormulaire.get('title')?.hasError('required')">
         Le titre est requis
       </mat-error>
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="content" formControlName="content">
+      <input matInput placeholder="content" formControlName="content" [(ngModel)]="content">
       <mat-error *ngIf="monFormulaire.get('content')?.hasError('required')">
         Le contenu est requis
       </mat-error>
@@ -33,4 +33,33 @@
           [disabled]="monFormulaire.invalid">
           Créer
   </button>
-</form>
+</form> -->
+<mat-card class="center">
+  <mat-card-header>
+      <mat-card-title>Créer un nouvel article</mat-card-title>
+  </mat-card-header>
+
+  <mat-form-field>
+    <mat-select placeholder="Thème" 
+                [(ngModel)]="article.themeId">
+      <mat-option *ngFor="let option of options" [value]="option.id">
+        {{ option.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  
+  <mat-form-field>
+    <input matInput placeholder="Titre"
+            [(ngModel)]="article.title">
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Contenu"
+            [(ngModel)]="article.content">
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" type="submit" 
+        (click)="onSubmit()">
+        Créer
+  </button>
+</mat-card>
