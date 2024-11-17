@@ -12,13 +12,15 @@ import { MeComponent } from './components/me/me.component';
 import { ThemesComponent } from './components/themes/themes.component';
 import { MatGridListModule } from '@angular/material/grid-list'
 import { MatCardModule } from '@angular/material/card';
+import { SingleArticleComponent } from './components/single-article/single-article.component';
 
 @NgModule({
   declarations: [
     ArticlesComponent,
     CreateComponent,
     MeComponent,
-    ThemesComponent
+    ThemesComponent,
+    SingleArticleComponent
   ],
   imports: [
     CommonModule,
