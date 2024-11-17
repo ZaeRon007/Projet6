@@ -3,4 +3,19 @@
     <button class="gap" color="primary" (click)="create()">Créer un article</button>
     <p class="gap">Trier par</p>
 </div>
-<p>liste d'articles</p>
+<div>
+    <mat-grid-list cols="2" rowHeight="300px" gutterSize="0px">
+        <mat-grid-tile *ngFor="let article of articles">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title>{{article.title}}</mat-card-title>
+                </mat-card-header>
+                    <mat-card-content>{{article.createdAt}}</mat-card-content>
+                    <mat-card-content>{{(article.userId)}}</mat-card-content>
+                <mat-card-content>
+                    <p>{{article.content}}</p>
+                </mat-card-content>
+            </mat-card>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
