@@ -20,4 +20,7 @@ public class ThemeEntity {
 
     @Column(name = "name")
     private String name;
+
+    @Column(name = "content", length = 2000)
+    private String content;
 }

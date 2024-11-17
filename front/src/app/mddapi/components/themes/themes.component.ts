@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { themeEntity } from 'src/app/core/models/themeEntity';
+import { ThemeService } from '../../services/themeService';
 
 @Component({
   selector: 'app-themes',
@@ -7,9 +9,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ThemesComponent implements OnInit {
 
-  constructor() { }
+  themes: themeEntity[] = [];
+
+  constructor(private themeService: ThemeService) { }
 
   ngOnInit(): void {
+    this.themeService.fetch().subscribe((response: themeEntity[]) => {
+      this.themes = response;
+    });
   }
 
 }
