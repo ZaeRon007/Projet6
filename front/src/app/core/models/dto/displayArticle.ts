@@ -4,4 +4,5 @@ export class DisplayArticle {
     date!: string;
     user!: string;
     content!: string;
+    theme!: string;
 }
