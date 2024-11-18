@@ -3,10 +3,9 @@ import { Router } from '@angular/router';
 import { ArticleService } from '../../services/articlesService';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../services/userService';
-import { forkJoin, map, Observable, Subscription, switchMap } from 'rxjs';
+import { forkJoin, map, Subscription, switchMap } from 'rxjs';
 import { DisplayArticle } from 'src/app/core/models/dto/displayArticle';
-import { getArticle } from 'src/app/core/models/dto/getArticle';
-import { userEntity } from 'src/app/core/models/userEntity';
+import { ArticleEntity } from 'src/app/core/models/articleEntity';
 
 @Component({
   selector: 'app-articles',
@@ -24,7 +23,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.sub = this.articleService.fetch().pipe(
-      switchMap((response: getArticle[]) => {
+      switchMap((response: ArticleEntity[]) => {
         const displayArticles$ = response.map(article =>
           this.userService.getUsernameById(article.userId).pipe(
             map(username => {
