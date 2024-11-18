@@ -36,18 +36,18 @@ public class ArticleController {
     }
 
     @GetMapping("/subscribes")
-    public ResponseEntity<?> getAllSubscribes(){
+    public ResponseEntity<?> getAllSubscribes() throws ParseException{
         return ResponseEntity.ok().body(articleService.getAllSubscribes());
     }
 
     @PostMapping("/subscribe/{id}")
-    public ResponseEntity<?> subscribeToArticle(@PathVariable String id){
+    public ResponseEntity<?> subscribeToArticle(@PathVariable String id) throws ParseException{
         articleService.subscribeToArticle(id);
         return ResponseEntity.ok().body(null);
     }
 
     @PostMapping("/unsubscribe/{id}")
-    public ResponseEntity<?> unsubscribeToArticle(@PathVariable String id){
+    public ResponseEntity<?> unsubscribeToArticle(@PathVariable String id) throws ParseException{
         articleService.unsubscribeToArticle(id);
         return ResponseEntity.ok().body(null);
     }
