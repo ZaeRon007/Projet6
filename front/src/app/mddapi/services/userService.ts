@@ -1,6 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
-import { BehaviorSubject, Observable, tap } from "rxjs";
+import { BehaviorSubject, map, Observable, tap } from "rxjs";
 import { userEntity } from "src/app/core/models/userEntity";
 import { environment } from "src/environments/environment.prod";
 
@@ -16,5 +16,11 @@ export class UserService {
     public getUserById(id: Number): Observable<userEntity> {
         return this.http.get<userEntity>(`${this.apiUrl}user/` + id).pipe(
             tap(user => this.user$.next(user)));
+    }
+
+    public getUsernameById(id: Number): Observable<string> {
+        return this.getUserById(id).pipe(
+            map(user => user.name)
+        );
     }
 }

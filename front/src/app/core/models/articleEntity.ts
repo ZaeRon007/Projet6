@@ -5,6 +5,4 @@ export class ArticleEntity {
     content!: string;
     createdAt!: string;
     userId!: number;
-
-    constructor(){}
 }
