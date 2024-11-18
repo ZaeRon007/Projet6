@@ -10,8 +10,8 @@
                 <mat-card-header>
                     <mat-card-title>{{article.title}}</mat-card-title>
                 </mat-card-header>
-                    <mat-card-content>{{article.createdAt}}</mat-card-content>
-                    <mat-card-content>{{(article.userId)}}</mat-card-content>
+                    <mat-card-content>{{article.date| date:'mediumDate'}}</mat-card-content>
+                    <mat-card-content>{{article.user}}</mat-card-content>
                 <mat-card-content>
                     <p>{{article.content}}</p>
                 </mat-card-content>

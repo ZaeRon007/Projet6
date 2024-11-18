@@ -1,10 +1,12 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArticleService } from '../../services/articlesService';
-import { getArticle } from 'src/app/core/models/dto/getArticle';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../services/userService';
-import { Subscription } from 'rxjs';
+import { forkJoin, map, Observable, Subscription, switchMap } from 'rxjs';
+import { DisplayArticle } from 'src/app/core/models/dto/displayArticle';
+import { getArticle } from 'src/app/core/models/dto/getArticle';
+import { userEntity } from 'src/app/core/models/userEntity';
 
 @Component({
   selector: 'app-articles',
@@ -12,7 +14,7 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./articles.component.scss']
 })
 export class ArticlesComponent implements OnInit, OnDestroy {
-  articles: getArticle[] = [];
+  articles: DisplayArticle[] = [];
   private sub!: Subscription;
 
   constructor(private router: Router,
@@ -21,15 +23,25 @@ export class ArticlesComponent implements OnInit, OnDestroy {
               private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.sub = this.articleService.fetch().subscribe((articles: getArticle[]) => {
-      this.articles = articles;
-
-      console.log(articles);
-    })
-  }
-
-  getUserById(id: number){
-    return this.userService.getUserById(id).subscribe();
+    this.sub = this.articleService.fetch().pipe(
+      switchMap((response: getArticle[]) => {
+        const displayArticles$ = response.map(article =>
+          this.userService.getUsernameById(article.userId).pipe(
+            map(username => {
+              const displayArticle: DisplayArticle = new DisplayArticle();
+              displayArticle.title = article.title;
+              displayArticle.content = article.content;
+              displayArticle.date = article.createdAt;
+              displayArticle.user = username;
+              return displayArticle;
+            })
+          )
+        );
+        return forkJoin(displayArticles$);
+      })
+    ).subscribe((displayArticles: DisplayArticle[]) => {
+        this.articles = displayArticles;
+    });
   }
 
   create(): void {
