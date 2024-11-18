@@ -28,6 +28,7 @@ export class ArticlesComponent implements OnInit, OnDestroy {
           this.userService.getUsernameById(article.userId).pipe(
             map(username => {
               const displayArticle: DisplayArticle = new DisplayArticle();
+              displayArticle.id = article.id;
               displayArticle.title = article.title;
               displayArticle.content = article.content;
               displayArticle.date = article.createdAt;

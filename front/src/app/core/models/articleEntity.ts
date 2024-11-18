@@ -1,5 +1,6 @@
 
 export class ArticleEntity {
+    id!: number;
     themeId!: number;
     title!: string;
     content!: string;
