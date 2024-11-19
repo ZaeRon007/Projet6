@@ -19,7 +19,6 @@ public class ArticleService {
 
     @Autowired
     private UserSubscribesRepository userSubscribesRepository;
-    
 
     @Autowired
     private UserService userService;
@@ -52,13 +51,7 @@ public class ArticleService {
         int userId = userService.getMe().getId();
         UserSubscribesEntity userSubscribesEntity = new UserSubscribesEntity();
         userSubscribesEntity.setUserId(String.valueOf(userId));
-        userSubscribesEntity.setThemeId(
-                                    String.valueOf(
-                                    articleRepository.findById(Integer.parseInt(id))
-                                    .get()
-                                    .getThemeId())
-        );
-        
+        userSubscribesEntity.setThemeId(id);
         userSubscribesRepository.save(userSubscribesEntity);
     }
 
@@ -66,12 +59,7 @@ public class ArticleService {
         int userId = userService.getMe().getId();
         UserSubscribesEntity userSubscribesEntity = new UserSubscribesEntity();
         userSubscribesEntity.setUserId(String.valueOf(userId));
-        userSubscribesEntity.setThemeId(
-                                    String.valueOf(
-                                    articleRepository.findById(Integer.parseInt(id))
-                                    .get()
-                                    .getThemeId())
-        );
+        userSubscribesEntity.setThemeId(id);
         
         userSubscribesRepository.delete(userSubscribesEntity);
     }
