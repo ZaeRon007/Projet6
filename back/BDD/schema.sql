@@ -17,7 +17,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
 CREATE TABLE IF NOT EXISTS `theme` (
   `id` INT PRIMARY KEY AUTO_INCREMENT,
   `name` VARCHAR(40),
-  'content' VARCHAR(2000)
+  `content` VARCHAR(2000)
 );
 
 CREATE TABLE IF NOT EXISTS `user` (
@@ -30,6 +30,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 );
 
 CREATE TABLE IF NOT EXISTS `user_subscribes` (
+  `id` INT PRIMARY KEY AUTO_INCREMENT,
   `user_id` INT, 
   `theme_id` INT
 );
