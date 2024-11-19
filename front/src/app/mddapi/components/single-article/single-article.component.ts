@@ -7,6 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { map, Subscription, switchMap } from 'rxjs';
 import { ArticleEntity } from 'src/app/core/models/articleEntity';
 import { UserService } from '../../services/userService';
+import { ThemeService } from '../../services/themeService';
 
 @Component({
   selector: 'app-single-article',
@@ -22,23 +23,29 @@ export class SingleArticleComponent implements OnInit, OnDestroy {
   constructor(private http: HttpClient,
               private articleService: ArticleService,
               private route: ActivatedRoute,
-              private userService: UserService) { }
+              private userService: UserService,
+              private themeService: ThemeService) { }
 
   ngOnInit(): void {
     this.sub = this.articleService.getArticleById(
       Number.parseInt(this.route.snapshot.paramMap.get('id')!)).pipe(
-        switchMap((article: ArticleEntity) =>
-            this.userService.getUsernameById(article.userId).pipe(
-              map(username => {
-                const displayArticle: DisplayArticle = new DisplayArticle();
-                displayArticle.id = article.id;
-                displayArticle.title = article.title;
-                displayArticle.content = article.content;
-                displayArticle.date = article.createdAt;
-                displayArticle.theme = "#TODO";
-                displayArticle.user = username;
-                return displayArticle; 
-              })
+        
+        switchMap((article: ArticleEntity) => this.userService.getUsernameById(article.userId).pipe(
+
+              switchMap(username => this.themeService.getThemeNameById(article.themeId).pipe(
+
+                  map(themeName => {
+                    const displayArticle: DisplayArticle = new DisplayArticle();
+                    displayArticle.id = article.id;
+                    displayArticle.title = article.title;
+                    displayArticle.content = article.content;
+                    displayArticle.date = article.createdAt;
+                    displayArticle.theme = themeName;
+                    displayArticle.user = username;
+                    return displayArticle; 
+                  })
+                )
+              )
             )
         )
     ).subscribe((displayArticle: DisplayArticle) => {
