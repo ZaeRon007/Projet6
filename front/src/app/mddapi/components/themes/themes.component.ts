@@ -15,7 +15,6 @@ import { BehaviorSubject } from 'rxjs';
 export class ThemesComponent implements OnInit {
   private apiUrl = environment.baseUrl;
   themes: themeEntity[] = [];
-  // subscribes: SubscribeEntity[] = [];
   subscribedSet$ = new BehaviorSubject<Set<number>>(new Set<number>());
 
 
