@@ -6,6 +6,7 @@ import { UserService } from '../../services/userService';
 import { forkJoin, map, Subscription, switchMap } from 'rxjs';
 import { DisplayArticle } from 'src/app/core/models/dto/displayArticle';
 import { ArticleEntity } from 'src/app/core/models/articleEntity';
+import { SubscribeEntity } from 'src/app/core/models/subscribeEntity';
 
 @Component({
   selector: 'app-articles',
@@ -22,22 +23,34 @@ export class ArticlesComponent implements OnInit, OnDestroy {
               private http: HttpClient) { }
 
   ngOnInit(): void {
-    this.sub = this.articleService.fetch().pipe(
-      switchMap((response: ArticleEntity[]) => {
-        const displayArticles$ = response.map(article =>
-          this.userService.getUsernameById(article.userId).pipe(
-            map(username => {
-              const displayArticle: DisplayArticle = new DisplayArticle();
-              displayArticle.id = article.id;
-              displayArticle.title = article.title;
-              displayArticle.content = article.content;
-              displayArticle.date = article.createdAt;
-              displayArticle.user = username;
-              return displayArticle;
-            })
-          )
-        );
-        return forkJoin(displayArticles$);
+    this.sub = this.setupDisplayArticles();
+  }
+
+  setupDisplayArticles(): Subscription {
+    return this.articleService.getAllSubscribes().pipe(
+      switchMap((subscriptions: SubscribeEntity[]) => {
+        const subscriptions$ = subscriptions.map(subscription => this.articleService.getArticlesByThemeId(subscription.themeId).pipe(
+          
+          switchMap((articles: ArticleEntity[]) => {
+            const displayArticle$ = articles.map(article => this.userService.getUsernameById(article.userId).pipe(
+              map(username => {
+                const displayArticle: DisplayArticle = new DisplayArticle();
+                displayArticle.id = article.id;
+                displayArticle.title = article.title;
+                displayArticle.content = article.content;
+                displayArticle.date = article.createdAt;
+                displayArticle.user = username;
+                return displayArticle;
+              })
+            ));
+            return forkJoin(displayArticle$);
+          })
+        ));
+        return forkJoin(subscriptions$);
+
+      }),
+      map((nestedArticles: DisplayArticle[][]) => {
+        return nestedArticles.flat();// Aplatissement des tableaux imbriqués
       })
     ).subscribe((displayArticles: DisplayArticle[]) => {
         this.articles = displayArticles;

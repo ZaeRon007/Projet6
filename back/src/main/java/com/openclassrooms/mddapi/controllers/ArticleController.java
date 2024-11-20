@@ -51,4 +51,9 @@ public class ArticleController {
         articleService.unsubscribeToArticle(id);
         return ResponseEntity.ok().body(null);
     }
+
+    @GetMapping("subscribes/theme/{id}")
+    public ResponseEntity<?> getArticlesByThemeId(@PathVariable String id){
+        return ResponseEntity.ok().body(articleService.getArticlesByThemeId(id));
+    }
 }

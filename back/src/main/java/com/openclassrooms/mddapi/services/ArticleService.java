@@ -59,5 +59,9 @@ public class ArticleService {
         int userId = userService.getMe().getId();
         userSubscribesRepository.delete(userSubscribesRepository.findByUserIdAndThemeId(String.valueOf(userId), id));
     }
+
+    public Optional<ArticleEntity[]> getArticlesByThemeId(String id) {
+        return articleRepository.findAllByThemeId(Integer.parseInt(id));
+    }
     
 }
