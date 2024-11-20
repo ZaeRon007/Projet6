@@ -16,7 +16,6 @@ export class ThemeService implements OnInit{
     private theme$ = new BehaviorSubject<themeEntity>(new themeEntity);
 
     constructor(private http: HttpClient,
-                private themeService: ThemeService,
                 private articleService: ArticleService){}
 
     ngOnInit(): void {
@@ -51,7 +50,7 @@ export class ThemeService implements OnInit{
         return this.articleService.getAllSubscribes().pipe(
             switchMap((response: SubscribeEntity[]) => {
               const displayThemes$ = response.map(theme => 
-                this.themeService.getThemeById(theme.themeId).pipe(
+                this.getThemeById(theme.themeId).pipe(
                   map(res => {
                     const displayThemes: DisplayThemes = new DisplayThemes();
                     displayThemes.id = res.id;
