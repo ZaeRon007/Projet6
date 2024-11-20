@@ -28,3 +28,22 @@
           Se déconnecter
   </button>
 </mat-card>
+<mat-card-header>
+    <mat-card-title>Abonnements</mat-card-title>
+</mat-card-header>
+<mat-grid-list cols="2" rowHeight="300px" gutterSize="0px">
+  <mat-grid-tile *ngFor="let theme of displayThemes">
+          <mat-card>
+                  <mat-card-content>{{theme.title}}</mat-card-content>
+              <mat-card-content>
+                  <p>{{theme.content}}</p>
+              </mat-card-content>
+          </mat-card>
+          <button mat-raised-button 
+                        color="warn" 
+                        type="button" 
+                        (click)="onClickUnSubscribe(theme.id)">
+                    Se désabonner
+                </button>
+  </mat-grid-tile>
+</mat-grid-list>
