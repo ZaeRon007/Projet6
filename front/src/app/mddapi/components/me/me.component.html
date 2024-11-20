@@ -20,7 +20,8 @@
   <button mat-raised-button 
         color="primary" 
         type="submit" 
-        (click)="onSubmit()">
+        (click)="onSubmit()"
+        [disabled]="!isFormValid()">
         Sauvegarder
   </button>
   <button type="submit" 

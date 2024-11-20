@@ -18,8 +18,9 @@ export class MeComponent implements OnInit, OnDestroy {
   updateMeSubscription: Subscription = new Subscription();
   unSubscribeSubscription: Subscription = new Subscription();
   displayThemeSubscription: Subscription = new Subscription();
-
   user: userEntity = {name: "name", email: "email"};
+  originalUsername: string = '';
+  originalEmail: string = '';
   
   constructor(private authService: AuthService,
               private themeService: ThemeService,
@@ -30,6 +31,8 @@ export class MeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getMeSubscription = this.userService.getMe().subscribe((response : userEntity) => {
       this.user = response;
+      this.originalUsername = response.name;
+      this.originalEmail = response.email;
     });
 
     this.displayThemeSubscription = this.articleService.setupThemeSubscriptionDisplay().subscribe((response: DisplayThemes[]) => {
@@ -47,6 +50,11 @@ export class MeComponent implements OnInit, OnDestroy {
 
   onClickUnSubscribe(id: number):void {
     this.unSubscribeSubscription = this.themeService.unSubscribeToTheme(id).subscribe();
+  }
+
+  isFormValid(): boolean{
+    return this.user.name != this.originalUsername || 
+          this.user.email != this.originalEmail;
   }
 
   ngOnDestroy(): void {
