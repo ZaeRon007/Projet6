@@ -13,10 +13,10 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 export class ThemesComponent implements OnInit, OnDestroy {
   themes: themeEntity[] = [];
   subscribedSet$ = new BehaviorSubject<Set<number>>(new Set<number>());
-  themeFetchSubscription!: Subscription;
-  themeSubscriptionList!: Subscription;
-  themeSubscription!: Subscription;
-  themeUnSubscription!: Subscription;
+  themeFetchSubscription: Subscription = new Subscription();
+  themeSubscriptionList: Subscription = new Subscription();
+  themeSubscription: Subscription = new Subscription();
+  themeUnSubscription: Subscription = new Subscription();
 
 
   constructor(private themeService: ThemeService,

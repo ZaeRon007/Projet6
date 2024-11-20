@@ -11,7 +11,7 @@ import { DisplayArticle } from 'src/app/core/models/dto/displayArticle';
 })
 export class ArticlesComponent implements OnInit, OnDestroy {
   articles: DisplayArticle[] = [];
-  private sub!: Subscription;
+  private sub: Subscription = new Subscription();
   ascendant: boolean = true;
 
   constructor(private router: Router,

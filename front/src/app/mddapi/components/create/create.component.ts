@@ -15,8 +15,8 @@ import { ArticleService } from '../../services/articlesService';
 export class CreateComponent implements OnInit, OnDestroy {
   options: themeEntity[] = [];
   article: CreateArticle = new CreateArticle;
-  themeSubscribe!: Subscription;
-  postSubscribe!: Subscription;
+  themeSubscribe: Subscription = new Subscription();
+  postSubscribe: Subscription = new Subscription();
 
   constructor(private router: Router,
               private articleService: ArticleService,

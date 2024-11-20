@@ -14,10 +14,10 @@ import { ArticleService } from '../../services/articlesService';
 })
 export class MeComponent implements OnInit, OnDestroy {
   displayThemes: DisplayThemes[] = [new DisplayThemes()];
-  getMeSubscription!: Subscription;
-  updateMeSubscription!: Subscription;
-  unSubscribeSubscription!: Subscription;
-  displayThemeSubscription!: Subscription;
+  getMeSubscription: Subscription = new Subscription();
+  updateMeSubscription: Subscription = new Subscription();
+  unSubscribeSubscription: Subscription = new Subscription();
+  displayThemeSubscription: Subscription = new Subscription();
 
   user: userEntity = {name: "name", email: "email"};
   
