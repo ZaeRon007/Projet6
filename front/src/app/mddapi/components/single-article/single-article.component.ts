@@ -1,13 +1,10 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { ArticleService } from '../../services/articlesService';
 import { DisplayArticle } from 'src/app/core/models/dto/displayArticle';
 import { ActivatedRoute } from '@angular/router';
-import { map, Subscription, switchMap } from 'rxjs';
-import { ArticleEntity } from 'src/app/core/models/articleEntity';
-import { UserService } from '../../services/userService';
-import { ThemeService } from '../../services/themeService';
+import { Subscription } from 'rxjs';
+import { CommentEntity } from 'src/app/core/models/CommentEntity';
 
 @Component({
   selector: 'app-single-article',
@@ -15,46 +12,30 @@ import { ThemeService } from '../../services/themeService';
   styleUrls: ['./single-article.component.scss']
 })
 export class SingleArticleComponent implements OnInit, OnDestroy {
-  private apiUrl = environment.baseUrl;
   article: DisplayArticle = new DisplayArticle;
-  private sub!: Subscription;
+  comments: CommentEntity[] = [new CommentEntity];
+  private articleSubscription!: Subscription;
+  private commentSubscription!: Subscription;
 
 
-  constructor(private http: HttpClient,
-              private articleService: ArticleService,
-              private route: ActivatedRoute,
-              private userService: UserService,
-              private themeService: ThemeService) { }
+  constructor(private articleService: ArticleService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.sub = this.articleService.getArticleById(
-      Number.parseInt(this.route.snapshot.paramMap.get('id')!)).pipe(
-        
-        switchMap((article: ArticleEntity) => this.userService.getUsernameById(article.userId).pipe(
-
-              switchMap(username => this.themeService.getThemeNameById(article.themeId).pipe(
-
-                  map(themeName => {
-                    const displayArticle: DisplayArticle = new DisplayArticle();
-                    displayArticle.id = article.id;
-                    displayArticle.title = article.title;
-                    displayArticle.content = article.content;
-                    displayArticle.date = article.createdAt;
-                    displayArticle.theme = themeName;
-                    displayArticle.user = username;
-                    return displayArticle; 
-                  })
-                )
-              )
-            )
-        )
-    ).subscribe((displayArticle: DisplayArticle) => {
-        this.article = displayArticle;
-      });
+    this.articleSubscription = this.articleService.setupSingleArticle(this.route.snapshot.paramMap.get('id')!).subscribe((displayArticle: DisplayArticle) => {
+      this.article = displayArticle;
+    });
   }
+
+  // setupCommentList(): Subscription {
+  //   return 
+  // }
 
   ngOnDestroy(): void {
-      this.sub.unsubscribe();
+      this.articleSubscription.unsubscribe();
+      // this.commentSubscription.unsubscribe();
   }
+
+  
 
 }

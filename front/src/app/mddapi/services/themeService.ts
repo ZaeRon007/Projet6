@@ -33,4 +33,12 @@ export class ThemeService implements OnInit{
             map(theme => theme.name)
         );
     }
+
+    public subscribeToTheme(id: number){
+        return this.http.post<void>(`${this.apiUrl}subscribe/` + id, null);
+    }
+
+    public unSubscribeToTheme(id: number){
+        return this.http.post<void>(`${this.apiUrl}unsubscribe/` + id, null);
+    }
 }
