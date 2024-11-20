@@ -15,8 +15,7 @@ export class ThemeService implements OnInit{
     private themes$ = new BehaviorSubject<themeEntity[]>([new themeEntity]);
     private theme$ = new BehaviorSubject<themeEntity>(new themeEntity);
 
-    constructor(private http: HttpClient,
-                private articleService: ArticleService){}
+    constructor(private http: HttpClient){}
 
     ngOnInit(): void {
         this.fetch();
@@ -44,28 +43,5 @@ export class ThemeService implements OnInit{
 
     public unSubscribeToTheme(id: number){
         return this.http.post<void>(`${this.apiUrl}unsubscribe/` + id, null);
-    }
-
-    public setupThemeSubscriptionDisplay() {
-        return this.articleService.getAllSubscribes().pipe(
-            switchMap((response: SubscribeEntity[]) => {
-              const displayThemes$ = response.map(theme => 
-                this.getThemeById(theme.themeId).pipe(
-                  map(res => {
-                    const displayThemes: DisplayThemes = new DisplayThemes();
-                    displayThemes.id = res.id;
-                    displayThemes.title = res.name;
-                    displayThemes.content = res.content;
-                    return displayThemes;
-                  })
-              )
-            );
-            return forkJoin(displayThemes$);
-            })
-          );
-    }
-
-    public getSubscriptionListForUser() {
-        return this.articleService.getAllSubscribes();
     }
 }

@@ -19,14 +19,15 @@ export class ThemesComponent implements OnInit, OnDestroy {
   themeUnSubscription!: Subscription;
 
 
-  constructor(private themeService: ThemeService) { }
+  constructor(private themeService: ThemeService,
+              private articleService: ArticleService) { }
 
   ngOnInit(): void {
     this.themeFetchSubscription = this.themeService.fetch().subscribe((response: themeEntity[]) => {
       this.themes = response;
     });
 
-    this.themeSubscriptionList = this.themeService.getSubscriptionListForUser().subscribe((response: SubscribeEntity[]) => {
+    this.themeSubscriptionList = this.articleService.getSubscriptionListForUser().subscribe((response: SubscribeEntity[]) => {
       const set = new Set(response.map(subscription => subscription.themeId));
       this.subscribedSet$.next(set);
     });

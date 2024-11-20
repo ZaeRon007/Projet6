@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { ThemeService } from '../../services/themeService';
 import { DisplayThemes } from 'src/app/core/models/dto/displayTheme';
 import { UserService } from '../../services/userService';
+import { ArticleService } from '../../services/articlesService';
 
 @Component({
   selector: 'app-me',
@@ -22,7 +23,8 @@ export class MeComponent implements OnInit, OnDestroy {
   
   constructor(private authService: AuthService,
               private themeService: ThemeService,
-              private userService: UserService){
+              private userService: UserService,
+              private articleService: ArticleService){
   }
 
   ngOnInit(): void {
@@ -30,7 +32,7 @@ export class MeComponent implements OnInit, OnDestroy {
       this.user = response;
     });
 
-    this.displayThemeSubscription = this.themeService.setupThemeSubscriptionDisplay().subscribe((response: DisplayThemes[]) => {
+    this.displayThemeSubscription = this.articleService.setupThemeSubscriptionDisplay().subscribe((response: DisplayThemes[]) => {
       this.displayThemes = response;
     });
   }

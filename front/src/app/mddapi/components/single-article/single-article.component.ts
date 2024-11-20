@@ -1,5 +1,4 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { environment } from 'src/environments/environment';
 import { ArticleService } from '../../services/articlesService';
 import { DisplayArticle } from 'src/app/core/models/dto/displayArticle';
 import { ActivatedRoute } from '@angular/router';

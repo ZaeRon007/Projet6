@@ -9,6 +9,7 @@ import { ThemeService } from "./themeService";
 import { UserService } from "./userService";
 import { DisplayArticle } from "src/app/core/models/dto/displayArticle";
 import { CreateArticle } from "src/app/core/models/dto/createArticle";
+import { DisplayThemes } from "src/app/core/models/dto/displayTheme";
 
 @Injectable({
     providedIn: 'root'
@@ -96,5 +97,28 @@ export class ArticleService {
 
     public createArticle(article: CreateArticle) {
         return this.http.post<CreateArticle>(`${this.apiUrl}article`, article)
+    }
+
+    public setupThemeSubscriptionDisplay() {
+        return this.getAllSubscribes().pipe(
+            switchMap((response: SubscribeEntity[]) => {
+              const displayThemes$ = response.map(theme => 
+                this.themeService.getThemeById(theme.themeId).pipe(
+                  map(res => {
+                    const displayThemes: DisplayThemes = new DisplayThemes();
+                    displayThemes.id = res.id;
+                    displayThemes.title = res.name;
+                    displayThemes.content = res.content;
+                    return displayThemes;
+                  })
+              )
+            );
+            return forkJoin(displayThemes$);
+            })
+          );
+    }
+
+    public getSubscriptionListForUser() {
+        return this.getAllSubscribes();
     }
 }
