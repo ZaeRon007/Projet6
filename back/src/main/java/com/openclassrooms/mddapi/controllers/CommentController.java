@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,7 +21,7 @@ public class CommentController {
     private CommentService commentService;
 
     @PostMapping("/{id}")
-    public ResponseEntity<?> commentArticle(@PathVariable String id, String content) throws NumberFormatException, ParseException{
+    public ResponseEntity<?> commentArticle(@PathVariable String id, @RequestBody String content) throws NumberFormatException, ParseException{
         return ResponseEntity.ok().body(commentService.commentArticle(Integer.parseInt(id), content));
     }
 
