@@ -33,7 +33,7 @@
     <mat-card-title>Abonnements</mat-card-title>
 </mat-card-header>
 <mat-grid-list cols="2" rowHeight="300px" gutterSize="0px">
-  <mat-grid-tile *ngFor="let theme of displayThemes">
+  <mat-grid-tile *ngFor="let theme of displayThemes$.value">
           <mat-card>
                   <mat-card-content>{{theme.title}}</mat-card-content>
               <mat-card-content>

@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { userEntity } from 'src/app/core/models/userEntity';
 import { AuthService } from 'src/app/core/services/auth.service';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, tap } from 'rxjs';
 import { ThemeService } from '../../services/themeService';
 import { DisplayThemes } from 'src/app/core/models/dto/displayTheme';
 import { UserService } from '../../services/userService';
@@ -13,7 +13,8 @@ import { ArticleService } from '../../services/articlesService';
   styleUrls: ['./me.component.scss']
 })
 export class MeComponent implements OnInit, OnDestroy {
-  displayThemes: DisplayThemes[] = [new DisplayThemes()];
+  displayThemes$ = new BehaviorSubject<DisplayThemes[]>([new DisplayThemes()]);
+  // displayThemes: DisplayThemes[] = [new DisplayThemes()];
   getMeSubscription: Subscription = new Subscription();
   updateMeSubscription: Subscription = new Subscription();
   unSubscribeSubscription: Subscription = new Subscription();
@@ -35,9 +36,8 @@ export class MeComponent implements OnInit, OnDestroy {
       this.originalEmail = response.email;
     });
 
-    this.displayThemeSubscription = this.articleService.setupThemeSubscriptionDisplay().subscribe((response: DisplayThemes[]) => {
-      this.displayThemes = response;
-    });
+    this.displayThemeSubscription = this.articleService.setupThemeSubscriptionDisplay().pipe(
+      tap(theme => this.displayThemes$.next(theme))).subscribe();
   }
 
   onSubmit():void {
@@ -48,9 +48,13 @@ export class MeComponent implements OnInit, OnDestroy {
     this.authService.logOut();
   }
 
-  onClickUnSubscribe(id: number):void {
-    this.unSubscribeSubscription = this.themeService.unSubscribeToTheme(id).subscribe();
+  onClickUnSubscribe(id: number): void {
+    this.unSubscribeSubscription = this.themeService.unSubscribeToTheme(id).subscribe(() => {
+        const updatedThemes = this.displayThemes$.getValue().filter(theme => theme.id !== id);
+        this.displayThemes$.next(updatedThemes);
+    });
   }
+  
 
   isFormValid(): boolean{
     return this.user.name != this.originalUsername || 
