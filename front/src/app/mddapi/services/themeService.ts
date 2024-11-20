@@ -1,8 +1,11 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
-import { BehaviorSubject, map, Observable, tap } from "rxjs";
+import { BehaviorSubject, forkJoin, map, Observable, switchMap, tap } from "rxjs";
+import { DisplayThemes } from "src/app/core/models/dto/displayTheme";
+import { SubscribeEntity } from "src/app/core/models/subscribeEntity";
 import { themeEntity } from "src/app/core/models/themeEntity";
 import { environment } from "src/environments/environment.prod";
+import { ArticleService } from "./articlesService";
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +15,9 @@ export class ThemeService implements OnInit{
     private themes$ = new BehaviorSubject<themeEntity[]>([new themeEntity]);
     private theme$ = new BehaviorSubject<themeEntity>(new themeEntity);
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient,
+                private themeService: ThemeService,
+                private articleService: ArticleService){}
 
     ngOnInit(): void {
         this.fetch();
@@ -40,5 +45,28 @@ export class ThemeService implements OnInit{
 
     public unSubscribeToTheme(id: number){
         return this.http.post<void>(`${this.apiUrl}unsubscribe/` + id, null);
+    }
+
+    public setupThemeSubscriptionDisplay() {
+        return this.articleService.getAllSubscribes().pipe(
+            switchMap((response: SubscribeEntity[]) => {
+              const displayThemes$ = response.map(theme => 
+                this.themeService.getThemeById(theme.themeId).pipe(
+                  map(res => {
+                    const displayThemes: DisplayThemes = new DisplayThemes();
+                    displayThemes.id = res.id;
+                    displayThemes.title = res.name;
+                    displayThemes.content = res.content;
+                    return displayThemes;
+                  })
+              )
+            );
+            return forkJoin(displayThemes$);
+            })
+          );
+    }
+
+    public getSubscriptionListForUser() {
+        return this.articleService.getAllSubscribes();
     }
 }

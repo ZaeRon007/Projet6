@@ -23,4 +23,14 @@ export class UserService {
             map(user => user.name)
         );
     }
+
+    public getMe() {
+        return this.http.get<userEntity>(`${this.apiUrl}auth/me`);
+    }
+
+    public updateMe(user: userEntity) {
+        return this.http.put<userEntity>(`${this.apiUrl}profile/me`, user);
+    }
+
+    
 }

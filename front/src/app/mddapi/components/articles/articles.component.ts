@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { ArticleService } from '../../services/articlesService';
 import { Subscription } from 'rxjs';
 import { DisplayArticle } from 'src/app/core/models/dto/displayArticle';
@@ -15,11 +15,10 @@ export class ArticlesComponent implements OnInit, OnDestroy {
   ascendant: boolean = true;
 
   constructor(private router: Router,
-              private route: ActivatedRoute,
               private articleService: ArticleService) { }
 
   ngOnInit(): void {
-    this.sub = this.articleService.setupArticles(this.route.snapshot.paramMap.get('id')!).subscribe((displayArticles: DisplayArticle[]) => {
+    this.sub = this.articleService.setupArticles().subscribe((displayArticles: DisplayArticle[]) => {
       this.articles = displayArticles;
   });
   }

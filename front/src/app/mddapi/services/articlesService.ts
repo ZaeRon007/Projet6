@@ -1,13 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { BehaviorSubject, forkJoin, map, Observable, switchMap, tap } from "rxjs";
+import { BehaviorSubject, forkJoin, map, Observable, Subscription, switchMap, tap } from "rxjs";
 import { ArticleEntity } from "src/app/core/models/articleEntity";
 import { SubscribeEntity } from "src/app/core/models/subscribeEntity";
 import { environment } from "src/environments/environment.prod";
 import { ThemeService } from "./themeService";
 import { UserService } from "./userService";
 import { DisplayArticle } from "src/app/core/models/dto/displayArticle";
+import { CreateArticle } from "src/app/core/models/dto/createArticle";
 
 @Injectable({
     providedIn: 'root'
@@ -19,8 +20,8 @@ export class ArticleService {
     private subscribes$ = new BehaviorSubject<SubscribeEntity[]>([new SubscribeEntity]);
 
     constructor(private http: HttpClient,
-        private userService: UserService,
-        private themeService: ThemeService) { }
+                private userService: UserService,
+                private themeService: ThemeService) { }
 
     public getArticleById(id: number): Observable<ArticleEntity> {
         return this.http.get<ArticleEntity>(`${this.apiUrl}article/` + id).pipe(
@@ -64,7 +65,7 @@ export class ArticleService {
           )
     }
 
-    public setupArticles(id: string){
+    public setupArticles(){
         return this.getAllSubscribes().pipe(
             switchMap((subscriptions: SubscribeEntity[]) => {
               const subscriptions$ = subscriptions.map(subscription => this.getArticlesByThemeId(subscription.themeId).pipe(
@@ -93,4 +94,7 @@ export class ArticleService {
           ); 
     }
 
+    public createArticle(article: CreateArticle) {
+        return this.http.post<CreateArticle>(`${this.apiUrl}article`, article)
+    }
 }
