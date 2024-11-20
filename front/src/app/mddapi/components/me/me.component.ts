@@ -14,7 +14,6 @@ import { ArticleService } from '../../services/articlesService';
 })
 export class MeComponent implements OnInit, OnDestroy {
   displayThemes$ = new BehaviorSubject<DisplayThemes[]>([new DisplayThemes()]);
-  // displayThemes: DisplayThemes[] = [new DisplayThemes()];
   getMeSubscription: Subscription = new Subscription();
   updateMeSubscription: Subscription = new Subscription();
   unSubscribeSubscription: Subscription = new Subscription();
