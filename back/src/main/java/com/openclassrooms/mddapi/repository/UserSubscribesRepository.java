@@ -7,4 +7,6 @@ import com.openclassrooms.mddapi.model.UserSubscribesEntity;
 @Repository
 public interface UserSubscribesRepository extends CrudRepository<UserSubscribesEntity, Integer> {
     Iterable<UserSubscribesEntity> findAllById(int id);
+    Iterable<UserSubscribesEntity> findAllByUserId(String id);
+    UserSubscribesEntity findByUserIdAndThemeId(String userId, String ThemeId);
 }

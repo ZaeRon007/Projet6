@@ -44,7 +44,7 @@ public class ArticleService {
 
     public Iterable<UserSubscribesEntity> getAllSubscribes() throws ParseException {
         int userId = userService.getMe().getId();
-        return userSubscribesRepository.findAllById(userId);
+        return userSubscribesRepository.findAllByUserId(String.valueOf(userId));
     }
 
     public void subscribeToArticle(String id) throws ParseException {
@@ -57,11 +57,7 @@ public class ArticleService {
 
     public void unsubscribeToArticle(String id) throws ParseException {
         int userId = userService.getMe().getId();
-        UserSubscribesEntity userSubscribesEntity = new UserSubscribesEntity();
-        userSubscribesEntity.setUserId(String.valueOf(userId));
-        userSubscribesEntity.setThemeId(id);
-        
-        userSubscribesRepository.delete(userSubscribesEntity);
+        userSubscribesRepository.delete(userSubscribesRepository.findByUserIdAndThemeId(String.valueOf(userId), id));
     }
     
 }
