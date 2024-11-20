@@ -16,6 +16,7 @@ import { SubscribeEntity } from 'src/app/core/models/subscribeEntity';
 export class ArticlesComponent implements OnInit, OnDestroy {
   articles: DisplayArticle[] = [];
   private sub!: Subscription;
+  ascendant: boolean = true;
 
   constructor(private router: Router,
               private articleService: ArticleService,
@@ -59,6 +60,25 @@ export class ArticlesComponent implements OnInit, OnDestroy {
 
   create(): void {
     this.router.navigateByUrl('articles/create');
+  }
+
+  sortByDate(): void{
+    if(this.ascendant){
+      this.articles.sort((a,b) => {
+        if(a.date < b.date) return -1;
+        if(a.date > b.date) return 1;
+        return 0;
+      })
+      this.ascendant = !this.ascendant;
+    }
+    else {
+      this.articles.sort((a,b) => {
+        if(a.date < b.date) return 1;
+        if(a.date > b.date) return -1;
+        return 0;
+      })
+      this.ascendant = !this.ascendant;
+    }
   }
 
   ngOnDestroy(): void {

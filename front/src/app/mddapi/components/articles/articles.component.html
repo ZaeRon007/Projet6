@@ -1,21 +1,22 @@
 <app-header></app-header>
 <div class="flex-row">
     <button class="gap" color="primary" (click)="create()">Créer un article</button>
-    <p class="gap">Trier par</p>
+    <!-- <p class="gap">Trier par</p> -->
+    <button mat-button (click)="sortByDate()">Trier par Date</button>
 </div>
-<mat-grid-list cols="2" rowHeight="300px" gutterSize="0px">
-    <mat-grid-tile *ngFor="let article of articles">
-        <a [routerLink]="['/articles/view', article.id]">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>{{article.title}}</mat-card-title>
-                </mat-card-header>
+    <mat-grid-list cols="2" rowHeight="300px" gutterSize="0px">
+        <mat-grid-tile *ngFor="let article of articles">
+            <a [routerLink]="['/articles/view', article.id]">
+                <mat-card>
+                    <mat-card-header>
+                        <mat-card-title>{{article.title}}</mat-card-title>
+                    </mat-card-header>
                     <mat-card-content>{{article.date| date:'mediumDate'}}</mat-card-content>
                     <mat-card-content>{{article.user}}</mat-card-content>
-                <mat-card-content>
-                    <p>{{article.content}}</p>
-                </mat-card-content>
-            </mat-card>
-        </a>
-    </mat-grid-tile>
-</mat-grid-list>
+                    <mat-card-content>
+                        <p>{{article.content}}</p>
+                    </mat-card-content>
+                </mat-card>
+            </a>
+        </mat-grid-tile>
+    </mat-grid-list>
