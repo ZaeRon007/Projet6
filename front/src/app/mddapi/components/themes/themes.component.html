@@ -9,10 +9,21 @@
                 <mat-card-content>
                     <p>{{theme.content}}</p>
                 </mat-card-content>
+                <button mat-raised-button 
+                        color="primary" 
+                        type="button" 
+                        (click)="onClickSubscribe(theme.id)"
+                        *ngIf="!doesIdexist(theme.id)">
+                    S'abonner
+                </button>
+                <button mat-raised-button 
+                        color="warn" 
+                        type="button" 
+                        (click)="onClickUnSubscribe(theme.id)"
+                        *ngIf="doesIdexist(theme.id)">
+                    Se désabonner
+                </button>
             </mat-card>
-            <button mat-raised-button color="primary" type="submit">
-                S'abonner
-            </button>
         </mat-grid-tile>
     </mat-grid-list>
 </div>
