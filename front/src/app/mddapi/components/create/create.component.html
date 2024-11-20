@@ -24,7 +24,8 @@
   </mat-form-field>
 
   <button mat-raised-button color="primary" type="submit" 
-        (click)="onSubmit()">
+        (click)="onSubmit()"
+        [disabled]="!isFormValid()">
         Créer
   </button>
 </mat-card>

@@ -34,6 +34,11 @@ export class CreateComponent implements OnInit, OnDestroy {
       this.router.navigateByUrl('/articles/home');
     });
   }
+
+  isFormValid(): boolean{
+    return !!this.article.themeId && !!this.article.title && !!this.article.content;
+  }
+
   ngOnDestroy(): void {
       this.themeSubscribe.unsubscribe();
       this.postSubscribe.unsubscribe();
