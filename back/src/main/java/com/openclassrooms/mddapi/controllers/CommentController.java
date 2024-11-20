@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.openclassrooms.mddapi.services.CommentService;
 
 @RestController
-@RequestMapping("/comment/article")
+@RequestMapping("/api/comment/article")
 public class CommentController {
     
     @Autowired
