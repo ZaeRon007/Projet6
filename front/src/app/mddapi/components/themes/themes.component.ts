@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ThemeService } from '../../services/themeService';
 import { ArticleService } from '../../services/articlesService';
-import { BehaviorSubject, forkJoin, map, Observable, Subscription, switchMap, tap } from 'rxjs';
+import { BehaviorSubject, map, Observable, Subscription, tap } from 'rxjs';
 import { DisplayThemes } from 'src/app/core/models/dto/displayTheme';
 
 @Component({
@@ -13,7 +13,6 @@ export class ThemesComponent implements OnInit, OnDestroy {
   subscribedThemes$ = new BehaviorSubject<DisplayThemes[]>([new DisplayThemes()]);
 
   themeFetchSubscription: Subscription = new Subscription();
-  themeSubscriptionList: Subscription = new Subscription();
   themeSubscription: Subscription = new Subscription();
   themeUnSubscription: Subscription = new Subscription();
 
@@ -24,7 +23,7 @@ export class ThemesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.themeFetchSubscription = this.articleService.setupDisplayThemes().pipe(
       tap((response: DisplayThemes[]) => this.subscribedThemes$.next(response))
-    ).subscribe(() => console.log(this.subscribedThemes$.value));
+    ).subscribe();
   }
 
   onClickSubscribe(id: number):void {
@@ -36,12 +35,11 @@ export class ThemesComponent implements OnInit, OnDestroy {
         return theme;
       })
       this.subscribedThemes$.next(updatedSubscribedThemes);
-      console.log(this.subscribedThemes$.value);
     })
   }
 
   onClickUnSubscribe(id: number):void {
-    this.themeSubscription = this.themeService.unSubscribeToTheme(id).subscribe(() => {
+    this.themeUnSubscription = this.themeService.unSubscribeToTheme(id).subscribe(() => {
       const updatedSubscribedThemes = this.subscribedThemes$.value.map((theme: DisplayThemes) => {
         if(theme.id == id)
           return {...theme, subscribed: false};
@@ -49,7 +47,6 @@ export class ThemesComponent implements OnInit, OnDestroy {
         return theme;
       })
       this.subscribedThemes$.next(updatedSubscribedThemes);
-      console.log(this.subscribedThemes$.value);
     })
   }
 
@@ -65,7 +62,6 @@ export class ThemesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.themeFetchSubscription.unsubscribe();
-    this.themeSubscriptionList.unsubscribe();
     this.themeSubscription.unsubscribe();
     this.themeUnSubscription.unsubscribe();
   }
