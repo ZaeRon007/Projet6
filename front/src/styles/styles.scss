@@ -12,3 +12,23 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.button-White {
+    width: 220px;
+    height: 40px;
+    border-radius: 5px;
+    border-width: 1px;
+    font-weight: 700;
+}
+
+.button-White:hover {
+    background-color: rgb(116,81,235);
+}
+
+.center {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
