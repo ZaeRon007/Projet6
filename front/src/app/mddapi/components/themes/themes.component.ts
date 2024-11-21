@@ -1,9 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { themeEntity } from 'src/app/core/models/themeEntity';
 import { ThemeService } from '../../services/themeService';
-import { SubscribeEntity } from 'src/app/core/models/subscribeEntity';
 import { ArticleService } from '../../services/articlesService';
-import { BehaviorSubject, Subscription } from 'rxjs';
+import { BehaviorSubject, forkJoin, map, Observable, Subscription, switchMap, tap } from 'rxjs';
+import { DisplayThemes } from 'src/app/core/models/dto/displayTheme';
 
 @Component({
   selector: 'app-themes',
@@ -11,8 +10,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
   styleUrls: ['./themes.component.scss']
 })
 export class ThemesComponent implements OnInit, OnDestroy {
-  themes: themeEntity[] = [];
-  subscribedSet$ = new BehaviorSubject<Set<number>>(new Set<number>());
+  subscribedThemes$ = new BehaviorSubject<DisplayThemes[]>([new DisplayThemes()]);
+
   themeFetchSubscription: Subscription = new Subscription();
   themeSubscriptionList: Subscription = new Subscription();
   themeSubscription: Subscription = new Subscription();
@@ -23,38 +22,46 @@ export class ThemesComponent implements OnInit, OnDestroy {
               private articleService: ArticleService) { }
 
   ngOnInit(): void {
-    this.themeFetchSubscription = this.themeService.fetch().subscribe((response: themeEntity[]) => {
-      this.themes = response;
-    });
-
-    this.themeSubscriptionList = this.articleService.getSubscriptionListForUser().subscribe((response: SubscribeEntity[]) => {
-      const set = new Set(response.map(subscription => subscription.themeId));
-      this.subscribedSet$.next(set);
-    });
-  }
-
-  doesIdexist(id: number): boolean {
-    const set = this.subscribedSet$.getValue();
-    return set.has(id);
+    this.themeFetchSubscription = this.articleService.setupDisplayThemes().pipe(
+      tap((response: DisplayThemes[]) => this.subscribedThemes$.next(response))
+    ).subscribe(() => console.log(this.subscribedThemes$.value));
   }
 
   onClickSubscribe(id: number):void {
     this.themeSubscription = this.themeService.subscribeToTheme(id).subscribe(() => {
-      const set = this.subscribedSet$.getValue();
-      set.add(id);
-      this.subscribedSet$.next(set);
-    });
-    
+      const updatedSubscribedThemes = this.subscribedThemes$.value.map(theme => {
+        if(theme.id == id)
+          return {...theme, subscribed: true};
+        
+        return theme;
+      })
+      this.subscribedThemes$.next(updatedSubscribedThemes);
+      console.log(this.subscribedThemes$.value);
+    })
   }
 
   onClickUnSubscribe(id: number):void {
-    this.themeUnSubscription = this.themeService.unSubscribeToTheme(id).subscribe(() => {
-      const set = this.subscribedSet$.getValue();
-      set.delete(id);
-      this.subscribedSet$.next(set);
-    });
-    
+    this.themeSubscription = this.themeService.unSubscribeToTheme(id).subscribe(() => {
+      const updatedSubscribedThemes = this.subscribedThemes$.value.map((theme: DisplayThemes) => {
+        if(theme.id == id)
+          return {...theme, subscribed: false};
+        
+        return theme;
+      })
+      this.subscribedThemes$.next(updatedSubscribedThemes);
+      console.log(this.subscribedThemes$.value);
+    })
   }
+
+  isSubscribedToTheme(id: number): Observable<boolean> {
+    return this.subscribedThemes$.pipe(
+      map(themes => {
+        const theme = themes.find(theme => theme.id === id); // Trouver le thème correspondant
+        return theme ? theme.subscribed : false; // Retourner true ou false selon le cas
+      })
+    );
+  }
+  
 
   ngOnDestroy(): void {
     this.themeFetchSubscription.unsubscribe();

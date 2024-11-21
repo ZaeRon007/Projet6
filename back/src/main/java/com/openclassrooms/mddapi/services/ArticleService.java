@@ -63,5 +63,10 @@ public class ArticleService {
     public Optional<ArticleEntity[]> getArticlesByThemeId(String id) {
         return articleRepository.findAllByThemeId(Integer.parseInt(id));
     }
+
+    public boolean isSubscribedToTheme(String id) throws ParseException {
+        int userId = userService.getMe().getId();
+        return userSubscribesRepository.existsByUserIdAndThemeId(String.valueOf(userId), id) ;
+    }
     
 }

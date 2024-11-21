@@ -46,6 +46,11 @@ public class ArticleController {
         return ResponseEntity.ok().body(null);
     }
 
+    @GetMapping("/subscribe/{id}")
+    public ResponseEntity<?> isSubscribedToTheme(@PathVariable String id) throws ParseException{
+        return ResponseEntity.ok().body(articleService.isSubscribedToTheme(id));
+    }
+
     @PostMapping("/unsubscribe/{id}")
     public ResponseEntity<?> unsubscribeToArticle(@PathVariable String id) throws ParseException{
         articleService.unsubscribeToArticle(id);

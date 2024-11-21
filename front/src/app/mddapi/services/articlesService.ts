@@ -10,6 +10,7 @@ import { UserService } from "./userService";
 import { DisplayArticle } from "src/app/core/models/dto/displayArticle";
 import { CreateArticle } from "src/app/core/models/dto/createArticle";
 import { DisplayThemes } from "src/app/core/models/dto/displayTheme";
+import { themeEntity } from "src/app/core/models/themeEntity";
 
 @Injectable({
     providedIn: 'root'
@@ -40,6 +41,10 @@ export class ArticleService {
         return this.http.get<ArticleEntity[]>(`${this.apiUrl}subscribes/theme/` + id).pipe(
             tap(article => this.articles$.next(article))
         );
+    }
+
+    public isSubscribedToTheme(id: number) {
+      return this.http.get<boolean>(`${this.apiUrl}subscribe/` + id);
     }
 
     public setupSingleArticle(id: string) {
@@ -111,14 +116,38 @@ export class ArticleService {
                     displayThemes.content = res.content;
                     return displayThemes;
                   })
-              )
-            );
+                )
+              );
             return forkJoin(displayThemes$);
             })
           );
     }
 
-    public getSubscriptionListForUser() {
-        return this.getAllSubscribes();
+    // public getSubscriptionListForUser() {
+    //     return this.getAllSubscribes().pipe(
+    //   map((subscriptions: SubscribeEntity[]) => {
+    //     return subscriptions.map(subcription => subcription.themeId);
+    //   })
+    // );
+    // }
+
+    public setupDisplayThemes() {
+      return this.themeService.fetch().pipe(
+        switchMap((themes: themeEntity[]) => {
+          const themes$ = themes.map(theme => this.isSubscribedToTheme(theme.id).pipe(
+
+            map(truth => {
+              const displayTheme: DisplayThemes = new DisplayThemes();
+              displayTheme.id = theme.id;
+              displayTheme.title = theme.name;
+              displayTheme.content = theme.content;
+              displayTheme.subscribed = truth;
+              return displayTheme;
+            })
+            
+          ));
+          return forkJoin(themes$);
+        })
+      )
     }
 }

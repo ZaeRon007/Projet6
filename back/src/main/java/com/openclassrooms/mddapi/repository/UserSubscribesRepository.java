@@ -9,4 +9,5 @@ public interface UserSubscribesRepository extends CrudRepository<UserSubscribesE
     Iterable<UserSubscribesEntity> findAllById(int id);
     Iterable<UserSubscribesEntity> findAllByUserId(String id);
     UserSubscribesEntity findByUserIdAndThemeId(String userId, String ThemeId);
+    Boolean existsByUserIdAndThemeId(String userId, String ThemeId);
 }
