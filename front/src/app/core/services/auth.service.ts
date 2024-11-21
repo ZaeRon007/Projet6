@@ -46,6 +46,11 @@ export class AuthService {
 
     registerUser(user: AuthRequest) {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.post(`${this.apiUrl}auth/register`, user, {headers});
+        return this.http.post<AuthRequest>(`${this.apiUrl}auth/register`, user, {headers});
+    }
+
+    loginUser(user: AuthRequest) {
+        const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+        return this.http.post<AuthRequest>(`${this.apiUrl}auth/login`, user, {headers});
     }
 }

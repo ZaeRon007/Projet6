@@ -19,7 +19,7 @@ export class userRegisterComponent implements OnDestroy{
   }
 
   isFormValid(): boolean {
-    return !!this.user.name && !!this.user.email && !!this.user.password;
+    return !!this.user.name.trim() && !!this.user.email.trim() && !!this.user.password.trim();
   }
 
   onSubmit():void {
