@@ -10,8 +10,6 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     display: flex;
     flex-direction: column;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 .button-White {
     width: 220px;
@@ -26,9 +24,43 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 .center {
-    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+}
+
+input {
+    height: 30px; 
+    border-width: 1px;   
+    border-radius: 5px;
+}
+
+mat-label {
+    display: flex;
+    margin-top: 15px;
+}
+
+mat-card-title {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+button {
+    display: flex;
+    margin-top: 15px;
+    justify-content: center;
+
+    align-items: center;
+    width: 120px;
+    height: 35px;
+    border-radius: 5px;
+    border-width: 1px;
+    font-weight: 600;
+
+    justify-self: center;
+
+    background-color: rgb(116,81,235);
+    color: beige;
 }
