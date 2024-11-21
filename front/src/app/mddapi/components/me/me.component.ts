@@ -13,7 +13,8 @@ import { ArticleService } from '../../services/articlesService';
   styleUrls: ['./me.component.scss']
 })
 export class MeComponent implements OnInit, OnDestroy {
-  displayThemes$ = new BehaviorSubject<DisplayThemes[]>([new DisplayThemes()]);
+  displayThemes$ = new BehaviorSubject<DisplayThemes[]>([]);
+
   getMeSubscription: Subscription = new Subscription();
   updateMeSubscription: Subscription = new Subscription();
   unSubscribeSubscription: Subscription = new Subscription();
