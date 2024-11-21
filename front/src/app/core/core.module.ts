@@ -13,6 +13,11 @@ import { userRegisterComponent } from './components/userRegister/userRegister.co
 import { FormsModule } from '@angular/forms';
 import { CoreRoutingModule } from './core-routing.module';
 import { UnAuthGuard } from './guards/unauth.guard';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
 
 
 @NgModule({
@@ -30,6 +35,11 @@ import { UnAuthGuard } from './guards/unauth.guard';
     CoreRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatGridListModule,
+    MatCardModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
@@ -43,6 +53,11 @@ import { UnAuthGuard } from './guards/unauth.guard';
     userAuthenticationComponent,
     userLoginComponent,
     userRegisterComponent,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatInputModule,
+    MatGridListModule,
+    MatCardModule,
   ]
 })
 export class CoreModule { 
