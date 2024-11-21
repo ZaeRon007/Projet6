@@ -1,9 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { AuthRequest } from 'src/app/core/models/auth.interface';
 import { environment } from 'src/environments/environment.prod';
+import { Subscription } from 'rxjs';
 
 
 @Component({
@@ -11,41 +12,40 @@ import { environment } from 'src/environments/environment.prod';
   templateUrl: './userLogin.component.html',
   styleUrls: ['./userLogin.component.scss']
 })
-export class userLoginComponent implements OnInit {
-  private apiUrl = environment.baseUrl;
+export class userLoginComponent implements OnDestroy {
+  user: AuthRequest = {email: "", name: "", password: ""};
+  logInSubscription: Subscription = new Subscription();
+  username: string = "";
 
-  name!: string;
-  password!: string;
-
-  constructor(private httpclient: HttpClient,
-              private router: Router,
+  constructor(private router: Router,
               private authService: AuthService) { }
 
-  ngOnInit(): void {
-    this.name = "";
-    this.password = "";
-  }
 
-  fillAuthReq(name: string, password: string): AuthRequest{
-    let authReq;
+  setupAuthReq() {
 
-    if(this.name.includes('@'))
-      authReq= {name: "" , email: name, password: password};
+    if(this.username.includes('@'))
+      this.user.email = this.username;
     else
-      authReq= {name: name , email: "", password: password};
-
-    return authReq as AuthRequest;
+      this.user.name = this.username;
   }
+
+  isFormValid(): boolean {
+    return !!this.user.password.trim() && !!this.username.trim();
+  }
+
 
   onSubmit():void {
-    let authReq : AuthRequest = this.fillAuthReq(this.name, this.password);
-
-    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    this.httpclient.post(`${this.apiUrl}auth/login`, authReq, {headers}).subscribe((response: any) => {
+    this.setupAuthReq()
+    this.logInSubscription = this.authService.loginUser(this.user).subscribe((response: any) => {
       this.authService.setToken(response.token);
       this.router.navigateByUrl('/articles/home');
     });
-
   }
+
+  ngOnDestroy(): void {
+      this.logInSubscription.unsubscribe();
+  }
+
+
 
 }

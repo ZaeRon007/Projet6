@@ -1,15 +1,32 @@
 <app-header></app-header>
-<h1 class="center">Se connecter</h1>
-
-<form (ngSubmit)="onSubmit()" class="center">
-
-    <label for="name">E-mail ou nom d'utilisateur</label>
-    <input type="name" id="nameInput" [(ngModel)]="name" name="name">
+<div class="center">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>Se connecter</mat-card-title>
+        </mat-card-header>
     
-    <label for="password">Mot de passe</label>
-    <input type="password" id="passwordInput" [(ngModel)]="password" name="password">
-    
-    <button type="submit" color="primary">Se connecter</button>
-</form>
+        <mat-card-content>
+            <form class="flex-column">
+                <mat-form-field>
+                    <mat-label>E-mail ou nom d'utilisateur</mat-label>
+                    <input matInput [(ngModel)]="username" name="username">
+                </mat-form-field>                       
+                
+                <mat-form-field>
+                    <mat-label>Mot de passe</mat-label>
+                    <input matInput [(ngModel)]="user.password" type="password" name="password">
+                </mat-form-field>
+                
+                <button mat-raised-button 
+                color="primary" 
+                type="submit" 
+                (click)="onSubmit()"
+                [disabled]="!isFormValid()">
+                Se connecter
+                </button>      
+            </form>                      
+        </mat-card-content>
+    </mat-card>
+</div>
 
 
