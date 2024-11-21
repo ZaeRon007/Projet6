@@ -44,7 +44,7 @@ export class AuthService {
             this.router.navigateByUrl('');
     }
 
-    logInUser(user: AuthRequest) {
+    registerUser(user: AuthRequest) {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         return this.http.post(`${this.apiUrl}auth/register`, user, {headers});
     }

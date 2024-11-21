@@ -23,7 +23,7 @@ export class userRegisterComponent implements OnDestroy{
   }
 
   onSubmit():void {
-    this.logInSubscription = this.authService.logInUser(this.user).subscribe((response: any) => {
+    this.logInSubscription = this.authService.registerUser(this.user).subscribe((response: any) => {
       this.authService.setToken(response.token);
       this.router.navigateByUrl('/articles/home');
     });
