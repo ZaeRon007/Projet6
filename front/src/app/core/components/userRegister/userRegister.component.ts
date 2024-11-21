@@ -11,7 +11,7 @@ import { Subscription } from 'rxjs';
 })
 export class userRegisterComponent implements OnDestroy{
   user: AuthRequest = {email: "", name: "", password: ""};
-  logInSubscription: Subscription = new Subscription();
+  registerSubscription: Subscription = new Subscription();
 
 
   constructor(private router: Router,
@@ -23,7 +23,7 @@ export class userRegisterComponent implements OnDestroy{
   }
 
   onSubmit():void {
-    this.logInSubscription = this.authService.registerUser(this.user).subscribe((response: any) => {
+    this.registerSubscription = this.authService.registerUser(this.user).subscribe((response: any) => {
       this.authService.setToken(response.token);
       this.router.navigateByUrl('/articles/home');
     });
@@ -31,6 +31,6 @@ export class userRegisterComponent implements OnDestroy{
   }
 
   ngOnDestroy(): void {
-      this.logInSubscription.unsubscribe();
+      this.registerSubscription.unsubscribe();
   }
 }
