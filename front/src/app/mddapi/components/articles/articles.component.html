@@ -4,19 +4,19 @@
     <!-- <p class="gap">Trier par</p> -->
     <button mat-button (click)="sortByDate()">Trier par Date</button>
 </div>
-<mat-grid-list cols="2" rowHeight="300px" gutterSize="0px">
-    <mat-grid-tile *ngFor="let article of articles">
-        <a [routerLink]="['/articles/view', article.id]">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>{{article.title}}</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>{{article.date| date:'mediumDate'}}</mat-card-content>
-                <mat-card-content>{{article.user}}</mat-card-content>
-                <mat-card-content>
-                    <p>{{article.content}}</p>
-                </mat-card-content>
-            </mat-card>
-        </a>
-    </mat-grid-tile>
-</mat-grid-list>
+<mat-card>
+    <mat-card-content>
+        <mat-grid-list cols="2" rowHeight="2:1">
+            <mat-grid-tile *ngFor="let article of articles">
+                <div [routerLink]="['/articles/view', article.id]">
+                    <h2>{{article.title}}</h2>
+                    <div class="flex-row unsetMarginLeft">
+                        <p>{{article.date| date:'mediumDate'}}</p>
+                        <p>{{article.user}}</p>
+                </div>
+                <p>{{article.content}}</p>
+            </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>

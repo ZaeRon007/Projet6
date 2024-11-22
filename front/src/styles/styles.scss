@@ -1,6 +1,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+a, text {
+    color: black;
+}
+
 .flex-row {
     display: flex;
     flex-direction: row;
@@ -36,15 +40,10 @@ input {
     border-radius: 5px;
 }
 
-mat-label {
-    display: flex;
-    margin-top: 15px;
-}
+/* ANGULAR MATERIAL COMPONENTS */
 
-mat-card-title {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 25px;
+mat-card {
+    box-shadow: none !important;
 }
 
 button {
@@ -59,12 +58,8 @@ button {
     border-width: 1px;
     font-weight: 600;
 
-    justify-self: center;
+    // justify-self: center;
 
     background-color: rgb(116,81,235);
     color: beige;
-}
-
-mat-card {
-    box-shadow: none !important;
 }

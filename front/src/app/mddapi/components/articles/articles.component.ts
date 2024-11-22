@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 import { ArticleService } from '../../services/articlesService';
 import { Subscription } from 'rxjs';
@@ -7,7 +7,8 @@ import { DisplayArticle } from 'src/app/core/models/dto/displayArticle';
 @Component({
   selector: 'app-articles',
   templateUrl: './articles.component.html',
-  styleUrls: ['./articles.component.scss']
+  styleUrls: ['./articles.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ArticlesComponent implements OnInit, OnDestroy {
   articles: DisplayArticle[] = [];
