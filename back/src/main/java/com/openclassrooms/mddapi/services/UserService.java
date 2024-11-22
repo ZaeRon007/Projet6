@@ -36,7 +36,8 @@ public class UserService {
         UserEntity userToAdd = new UserEntity(userRegisterDto.getName(),
                                             userRegisterDto.getEmail(),
                                             new TimeService().getTime());
-                                        
+                                                    
+        userToAdd.setUpdatedAt(new TimeService().getTime());
         userToAdd.setPassword(PasswordEncoder.encode(userRegisterDto.getPassword()));
         return userToAdd;
     }
@@ -130,6 +131,7 @@ public class UserService {
         UserEntity userEntity = userRepository.findById(userDto.getId());
         userEntity.setEmail(userDto.getEmail());
         userEntity.setName(userDto.getName());
+        userEntity.setUpdatedAt(new TimeService().getTime());
         return userRepository.save(userEntity).ToUserDto();
     }
     
