@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { userEntity } from 'src/app/core/models/userEntity';
 import { AuthService } from 'src/app/core/services/auth.service';
 import { BehaviorSubject, Subscription, tap } from 'rxjs';
@@ -10,7 +10,8 @@ import { ArticleService } from '../../services/articlesService';
 @Component({
   selector: 'app-me',
   templateUrl: './me.component.html',
-  styleUrls: ['./me.component.scss']
+  styleUrls: ['./me.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class MeComponent implements OnInit, OnDestroy {
   displayThemes$ = new BehaviorSubject<DisplayThemes[]>([]);
