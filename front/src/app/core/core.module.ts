@@ -18,7 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-
+import {MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -40,6 +40,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatInputModule,
     MatGridListModule,
     MatCardModule,
+    MatDividerModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
@@ -57,6 +58,7 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatInputModule,
     MatGridListModule,
+    MatDividerModule,
     MatCardModule,
   ]
 })
