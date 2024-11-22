@@ -1,31 +1,40 @@
 <app-header></app-header>
-<mat-card class="center">
-  <mat-card-header>
+<div class="center">
+  <mat-card>
+
+    <mat-card-header>
       <mat-card-title>Créer un nouvel article</mat-card-title>
-  </mat-card-header>
+    </mat-card-header>
 
-  <mat-form-field>
-    <mat-select placeholder="Thème" 
-                [(ngModel)]="article.themeId">
-      <mat-option *ngFor="let option of options" [value]="option.id">
-        {{ option.name }}
-      </mat-option>
-    </mat-select>
-  </mat-form-field>
-  
-  <mat-form-field>
-    <input matInput placeholder="Titre"
-            [(ngModel)]="article.title">
-  </mat-form-field>
+    <mat-card-content>
+      <form class="flex-column">
 
-  <mat-form-field>
-    <input matInput placeholder="Contenu"
-            [(ngModel)]="article.content">
-  </mat-form-field>
-
-  <button mat-raised-button color="primary" type="submit" 
-        (click)="onSubmit()"
-        [disabled]="!isFormValid()">
-        Créer
-  </button>
-</mat-card>
+        <mat-form-field>
+          <mat-select placeholder="Thème" 
+                      [(ngModel)]="article.themeId"
+                      name="theme">
+            <mat-option *ngFor="let option of options" [value]="option.id">
+              {{ option.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input matInput placeholder="Titre"
+                  [(ngModel)]="article.title" name="title">
+        </mat-form-field>
+        
+        <mat-form-field>
+          <input matInput placeholder="Contenu"
+                  [(ngModel)]="article.content" name="content">
+        </mat-form-field>
+        
+        <button mat-raised-button color="primary" type="submit" 
+              (click)="onSubmit()"
+              [disabled]="!isFormValid()">
+              Créer
+        </button>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
