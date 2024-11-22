@@ -58,4 +58,32 @@ mat-card-content {
         }
     }
 }
-  
+
+
+.button-container {
+    display: flex; /* Active Flexbox */
+    justify-content: space-between; /* Espace entre les boutons */
+    align-items: center; /* Aligne les boutons verticalement au centre */
+    padding: 10px; /* Optionnel : ajoute un peu d'espace intérieur */
+    width: 100%; /* Optionnel : s'adapte à la largeur du conteneur */
+}
+
+.sortDiv {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.arrowDown {
+    height: 35px;
+    transform: rotate(90deg);
+}
+
+.arrowUp {
+    height: 35px;
+    transform: rotate(-90deg);
+}
+
+p {
+    margin: unset !important;
+}

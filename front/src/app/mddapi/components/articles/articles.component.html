@@ -1,8 +1,10 @@
 <app-header></app-header>
-<div class="flex-row">
-    <button class="gap" color="primary" (click)="create()">Créer un article</button>
-    <!-- <p class="gap">Trier par</p> -->
-    <button mat-button (click)="sortByDate()">Trier par Date</button>
+<div class="flex-row button-container">
+    <button class="button-violet gap" color="primary" (click)="create()">Créer un article</button>
+     <div class="sortDiv" (click)="sortByDate()">
+         <p>Trier par Date</p>
+         <img [ngClass]="ascendant?'arrowUp':'arrowDown'" src="/assets/fleche.png" alt="logoFleche">
+     </div>
 </div>
 <mat-card>
     <mat-card-content>
