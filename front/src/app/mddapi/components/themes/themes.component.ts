@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { ThemeService } from '../../services/themeService';
 import { ArticleService } from '../../services/articlesService';
 import { BehaviorSubject, map, Observable, Subscription, tap } from 'rxjs';
@@ -7,7 +7,8 @@ import { DisplayThemes } from 'src/app/core/models/dto/displayTheme';
 @Component({
   selector: 'app-themes',
   templateUrl: './themes.component.html',
-  styleUrls: ['./themes.component.scss']
+  styleUrls: ['./themes.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class ThemesComponent implements OnInit, OnDestroy {
   subscribedThemes$ = new BehaviorSubject<DisplayThemes[]>([new DisplayThemes()]);

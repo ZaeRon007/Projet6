@@ -1,29 +1,27 @@
 <app-header></app-header>
-<div *ngIf="subscribedThemes$.value.length > 0">
-    <mat-grid-list cols="2" rowHeight="300px" gutterSize="0px">
-        <mat-grid-tile *ngFor="let theme of subscribedThemes$.value">
-            <mat-card>
-                <mat-card-header>
-                    <mat-card-title>{{theme.title}}</mat-card-title>
-                </mat-card-header>
-                <mat-card-content>
+<mat-card>
+    <mat-card-content>
+        <mat-grid-list cols="2" rowHeight="2:1">
+            <mat-grid-tile *ngFor="let theme of subscribedThemes$.value">
+                <div>
+                    <h2>{{theme.title}}</h2>
                     <p>{{theme.content}}</p>
-                </mat-card-content>                
-                <button mat-raised-button 
-                        color="primary" 
-                        type="button" 
-                        (click)="onClickSubscribe(theme.id)"
-                        *ngIf="!(isSubscribedToTheme(theme.id) | async)">
-                    S'abonner
-                </button>
-                <button mat-raised-button 
-                        color="warn" 
-                        type="button" 
-                        (click)="onClickUnSubscribe(theme.id)"
-                        *ngIf="isSubscribedToTheme(theme.id) | async">
-                    Se désabonner
-                </button>
-            </mat-card>
-        </mat-grid-tile>
-    </mat-grid-list>
-</div>
+                    <button mat-raised-button 
+                            color="primary" 
+                            type="button" 
+                            (click)="onClickSubscribe(theme.id)"
+                            *ngIf="!(isSubscribedToTheme(theme.id) | async)">
+                        S'abonner
+                    </button>
+                    <button mat-raised-button 
+                            color="warn" 
+                            type="button" 
+                            (click)="onClickUnSubscribe(theme.id)"
+                            *ngIf="isSubscribedToTheme(theme.id) | async">
+                        Se désabonner
+                    </button>
+                </div>
+            </mat-grid-tile>
+        </mat-grid-list>
+    </mat-card-content>
+</mat-card>
