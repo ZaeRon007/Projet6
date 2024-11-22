@@ -1,17 +1,21 @@
 <app-header></app-header>
+<a href="/auth">
+    <img class="setupDirection" src="/assets/fleche.png" alt="flecheLogo" />
+</a>
+
 <mat-card>
-    <mat-card-header>
-        <a [routerLink]="['/articles/home']">GO BACK</a>
-        <mat-card-title>{{article.title}}</mat-card-title>
-    </mat-card-header>
-        <mat-card-content>{{article.date| date:'mediumDate'}}</mat-card-content>
-        <mat-card-content>{{article.user}}</mat-card-content>
-        <mat-card-content>{{article.theme}}</mat-card-content>
     <mat-card-content>
+        <h2>{{article.title}}</h2>
+        <div class="flex-row unsetMarginLeft">
+            <p>{{article.date| date:'mediumDate'}}</p>
+            <p>{{article.user}}</p>
+            <p>{{article.theme}}</p>
+        </div>
         <p>{{article.content}}</p>
-    </mat-card-content>
+    </mat-card-content>    
 </mat-card>
-<br>
+        
+<mat-divider></mat-divider>
 
 <mat-card>
     <mat-card-header>
