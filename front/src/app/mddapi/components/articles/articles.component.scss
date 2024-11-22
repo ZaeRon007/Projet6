@@ -7,21 +7,6 @@ a {
     text-decoration: none;
 }
 
-.display {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start !important;
-    align-items: baseline;
-    padding: 16px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-}
-
-.left {
-    justify-content: flex-start !important; 
-    align-items: baseline;
-}
-
 .unsetMarginLeft {
     margin-left: 0px;
 }
@@ -33,10 +18,9 @@ mat-card-content {
     }
 
     mat-grid-tile {
-        // border: 1px solid black;
         
         div {
-            text-align: left; /* Alignement du texte à gauche */
+            text-align: left;
             justify-content: left !important;
             margin-left: 15px;
         }
@@ -59,13 +43,12 @@ mat-card-content {
     }
 }
 
-
 .button-container {
-    display: flex; /* Active Flexbox */
-    justify-content: space-between; /* Espace entre les boutons */
-    align-items: center; /* Aligne les boutons verticalement au centre */
-    padding: 10px; /* Optionnel : ajoute un peu d'espace intérieur */
-    width: 100%; /* Optionnel : s'adapte à la largeur du conteneur */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px; 
+    width: 100%;
 }
 
 .sortDiv {
