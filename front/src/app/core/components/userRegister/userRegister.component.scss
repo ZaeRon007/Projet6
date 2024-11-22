@@ -1,8 +1,5 @@
-// .center {
-//     height: 10vh;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//     flex-direction: column;
-//     gap: 5px;
-// }
+.setupDirection {
+    transform: rotate(180deg);
+    height: 35px;
+    margin-left: 40px;
+}
