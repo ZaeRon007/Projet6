@@ -40,26 +40,63 @@ input {
     border-radius: 5px;
 }
 
-/* ANGULAR MATERIAL COMPONENTS */
-
-mat-card {
-    box-shadow: none !important;
-}
 
 button {
     display: flex;
     margin-top: 15px;
     justify-content: center;
-
+    
     align-items: center;
     width: 120px;
     height: 35px;
     border-radius: 5px;
     border-width: 1px;
     font-weight: 600;
-
+    
     // justify-self: center;
-
+    
     background-color: rgb(116,81,235);
     color: beige;
+}
+
+/* ANGULAR MATERIAL COMPONENTS */
+
+mat-card {
+    box-shadow: none !important;
+}
+
+mat-card-header {
+    justify-content: center;
+}
+
+mat-card-content {
+
+    mat-grid-list {
+        margin: 15px;
+    }
+
+    mat-grid-tile {
+        background-color: rgb(245, 245, 245);
+        div {
+            text-align: left;
+            justify-content: left !important;
+            margin-left: 15px;
+        }
+        
+        h2 {
+          font-size: 18px;
+          font-weight: 550;
+          text-align: left;
+          margin: 0 0 8px 0;
+          width: 100%;
+        }
+    
+        p {
+          font-size: 14px;
+          text-align: left;
+          margin: 0 0 16px 0;
+          width: 100%; 
+          flex-grow: 1;
+        }
+    }
 }
