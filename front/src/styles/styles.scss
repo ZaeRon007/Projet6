@@ -59,6 +59,10 @@ button {
     color: beige;
 }
 
+.margin-bottom {
+    margin-bottom: 15px;
+}
+
 /* ANGULAR MATERIAL COMPONENTS */
 
 mat-card {
@@ -77,9 +81,12 @@ mat-card-content {
 
     mat-grid-tile {
         background-color: rgb(245, 245, 245);
+        border-radius: 16px;
+
         div {
             text-align: left;
             justify-content: left !important;
+            align-items: unset !important;
             margin-left: 15px;
         }
         

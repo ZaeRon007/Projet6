@@ -12,7 +12,7 @@
             <mat-grid-tile *ngFor="let article of articles">
                 <div [routerLink]="['/articles/view', article.id]">
                     <h2>{{article.title}}</h2>
-                    <div class="flex-row unsetMarginLeft">
+                    <div class="flex-row unsetMarginLeft margin-bottom">
                         <p>{{article.date| date:'mediumDate'}}</p>
                         <p>{{article.user}}</p>
                     </div>
