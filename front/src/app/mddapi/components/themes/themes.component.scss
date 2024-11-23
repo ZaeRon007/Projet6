@@ -1,0 +1,12 @@
+.themeList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media screen and (min-width: 900px) {
+    .mat-card.theme {
+        width: calc(50% - 40px);
+    }
+}
