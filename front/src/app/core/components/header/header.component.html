@@ -1,10 +1,17 @@
-<div class="flex-row">
-    <img class="mdd_logo leftSide gap" src="/assets/logo_p6.png" alt="mddapi_logo" />
-    <div class="flex-row">
-        <a href="/articles/home" class="rightSide gap">Articles</a>
-        <a href="/articles/themes" class="rightSide gap">Thèmes</a>
-        <a href="/profile/me">
-            <img class="account_logo rightSide gap" src="/assets/account.png" alt="account_logo" />
+<div *ngIf="isLoggedIn()">
+    <div class="flex-row space-btwn">
+        <a [routerLink]="['/articles/home']">
+            <img class="mdd_logo" src="/assets/logo_p6.png" alt="mddapi_logo" />
         </a>
+        <div class="flex-row align-items">
+            <a [routerLink]="['/articles/home']" routerLinkActive="active" class="gap">Articles</a>
+            <a [routerLink]="['/articles/themes']" routerLinkActive="active" class="gap">Thèmes</a>
+            <button mat-icon-button [routerLink]="['/profile/me']" routerLinkActive="active" class="profile">
+                <mat-icon>account_circle</mat-icon>
+            </button>
+        </div>
     </div>
-  </div>
+
+    <mat-divider></mat-divider>
+</div>
+

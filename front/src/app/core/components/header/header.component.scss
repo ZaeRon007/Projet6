@@ -3,10 +3,14 @@
     justify-content: left;
 }
 
-.rightSide {
-    display: flex;
-    align-items: center; // vertical alignement
-    justify-content: flex-end;
+// .align-right {
+//     display: flex;
+//     align-items: center;
+//     justify-content: flex-end;
+// }
+
+.align-items {
+    align-items: center;
 }
 
 .mdd_logo {
@@ -24,4 +28,30 @@
     margin-left: 10px;
     margin-right: 10px;
 }
-  
+
+a {
+    text-decoration: none;
+}
+
+.space-btwn {
+    justify-content: space-between;
+}
+
+a.active {
+    color: rgb(116,81,235);
+}
+
+.profile mat-icon {
+    height: 40px;
+    width: 40px;
+    line-height: 40px;
+    font-size: 40px;
+}
+
+.profile {
+    color: gray;
+}
+
+.profile.active {
+    color: rgb(116,81,235);
+}

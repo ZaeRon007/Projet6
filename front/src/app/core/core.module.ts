@@ -18,7 +18,11 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import {MatDividerModule} from '@angular/material/divider';
+import { MatDividerModule } from '@angular/material/divider';
+import { NotFoundComponent } from './components/not-found/not-found.component';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+
 
 @NgModule({
   declarations: [
@@ -27,6 +31,7 @@ import {MatDividerModule} from '@angular/material/divider';
     userAuthenticationComponent,
     userLoginComponent,
     userRegisterComponent,
+    NotFoundComponent,
     
   ],
   imports: [
@@ -35,12 +40,14 @@ import {MatDividerModule} from '@angular/material/divider';
     CoreRoutingModule,
     HttpClientModule,
     FormsModule,
+    MatButtonModule,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,
     MatGridListModule,
     MatCardModule,
     MatDividerModule,
+    MatIconModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
@@ -60,6 +67,8 @@ import {MatDividerModule} from '@angular/material/divider';
     MatGridListModule,
     MatDividerModule,
     MatCardModule,
+    MatButtonModule,
+
   ]
 })
 export class CoreModule { 
