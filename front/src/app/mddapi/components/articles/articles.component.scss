@@ -8,7 +8,7 @@ a {
 }
 
 .unsetMarginLeft {
-    margin-left: 0px;
+    margin-left: unset;
 }
 
 .button-container {
@@ -37,4 +37,17 @@ a {
 
 p {
     margin: unset !important;
+}
+
+.articleList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+@media screen and (min-width: 900px) {
+    .mat-card.article {
+        width: calc(50% - 40px);
+    }
 }

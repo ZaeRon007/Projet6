@@ -1,6 +1,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.capitalized {
+    text-transform: capitalize;
+}
+
 a, text {
     color: black;
 }
@@ -41,7 +45,7 @@ input {
 }
 
 
-button {
+button[attr="mat-button"] {
     display: flex;
     margin-top: 15px;
     justify-content: center;
@@ -53,8 +57,6 @@ button {
     border-width: 1px;
     font-weight: 600;
     
-    // justify-self: center;
-    
     background-color: rgb(116,81,235);
     color: beige;
 }
@@ -65,12 +67,52 @@ button {
 
 /* ANGULAR MATERIAL COMPONENTS */
 
-mat-card {
-    box-shadow: none !important;
-}
 
-mat-card-header {
-    justify-content: center;
+/* GRID LIST */
+mat-card.mat-card {
+    box-shadow: none !important;
+    background-color: rgb(245, 245, 245);
+    border-radius: 16px;
+    padding: 1rem;
+    
+    mat-card-header {
+        justify-content: center;
+    }
+
+    mat-card-title {
+        h2 {
+          font-size: 18px;
+          font-weight: 550;
+          text-align: left;
+          margin: 0 0 8px 0;
+          width: 100%;
+        }
+    }
+
+    mat-card-subtitle {
+        div {
+            display: flex;
+            p {flex-grow: 1;}
+            p+p {flex-grow: 2;}
+            text-align: left;
+            justify-content: space-around;
+            align-items: unset;
+        }
+    }
+
+    mat-card-content {        
+        p {
+          font-size: 14px;
+          text-align: left;
+          margin: 0 0 16px 0;
+          width: 100%; 
+        }
+    }
+
+    button.mat-flat-button {
+        display: flex;
+        justify-self: center;
+    }
 }
 
 .mat-divider {
@@ -82,37 +124,14 @@ mat-card-header {
     justify-self: center;
 }
 
+
+
+/* FORMULAIRE */
+
 mat-card-content {
-
-    mat-grid-list {
-        margin: 15px;
-    }
-
-    mat-grid-tile {
-        background-color: rgb(245, 245, 245);
+    mat-form-field {
+        // border: 1px;
+        border-color: rgb(116,81,235);
         border-radius: 16px;
-
-        div {
-            text-align: left;
-            justify-content: left !important;
-            align-items: unset !important;
-            margin-left: 15px;
-        }
-        
-        h2 {
-          font-size: 18px;
-          font-weight: 550;
-          text-align: left;
-          margin: 0 0 8px 0;
-          width: 100%;
-        }
-    
-        p {
-          font-size: 14px;
-          text-align: left;
-          margin: 0 0 16px 0;
-          width: 100%; 
-          flex-grow: 1;
-        }
     }
 }

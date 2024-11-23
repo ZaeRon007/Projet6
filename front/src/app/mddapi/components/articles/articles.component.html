@@ -1,24 +1,23 @@
-<app-header></app-header>
 <div class="flex-row button-container">
-    <button class="button-violet gap" color="primary" (click)="create()">Créer un article</button>
-     <div class="sortDiv" (click)="sortByDate()">
-         <p>Trier par Date</p>
-         <img [ngClass]="ascendant?'arrowUp':'arrowDown'" src="/assets/fleche.png" alt="logoFleche">
-     </div>
+    <button mat-flat-button class="button-violet gap" color="primary" (click)="create()">Créer un article</button>
+    <div class="sortDiv" (click)="sortByDate()">
+        <p>Trier par Date</p>
+        <img [ngClass]="ascendant?'arrowUp':'arrowDown'" src="/assets/fleche.png" alt="logoFleche">
+    </div>
 </div>
-<mat-card>
-    <mat-card-content>
-        <mat-grid-list cols="2" rowHeight="2:1">
-            <mat-grid-tile *ngFor="let article of articles">
-                <div [routerLink]="['/articles/view', article.id]">
-                    <h2>{{article.title}}</h2>
-                    <div class="flex-row unsetMarginLeft margin-bottom">
-                        <p>{{article.date| date:'mediumDate'}}</p>
-                        <p>{{article.user}}</p>
-                    </div>
-                    <p>{{article.content}}</p>
-                </div>
-            </mat-grid-tile>
-        </mat-grid-list>
-    </mat-card-content>
-</mat-card>
+<div class="articleList">
+    <mat-card class="article" *ngFor="let article of articles" [routerLink]="['/articles/view', article.id]">
+        <mat-card-title>
+            <h2>{{article.title}}</h2>
+        </mat-card-title>
+        <mat-card-subtitle>
+            <div class="flex-row unsetMarginLeft margin-bottom">
+                <p>{{article.date | date:'mediumDate'}}</p>
+                <p class="capitalized">{{article.user}}</p>
+            </div>
+        </mat-card-subtitle>
+        <mat-card-content>
+            <p>{{article.content}}</p>
+        </mat-card-content>
+    </mat-card>
+</div>
