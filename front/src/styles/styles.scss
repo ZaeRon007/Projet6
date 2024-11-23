@@ -73,6 +73,15 @@ mat-card-header {
     justify-content: center;
 }
 
+.mat-divider {
+    border-top-color: black;
+}
+
+.custom-mat-divider {
+    width: 80%;
+    justify-self: center;
+}
+
 mat-card-content {
 
     mat-grid-list {
