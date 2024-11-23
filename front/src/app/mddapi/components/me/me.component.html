@@ -1,69 +1,49 @@
-<app-header></app-header>
-
 <div class="center">
   <mat-card>
-    <mat-card-header>
-        <mat-card-title>Profil utilisateur</mat-card-title>
-    </mat-card-header>
+    <mat-card-title>
+      <h2>Profil utilisateur</h2>
+    </mat-card-title>
 
     <mat-card-content>
       <form class="center">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
           <mat-label>Username</mat-label>
           <input matInput [(ngModel)]="user.name" name="username">
         </mat-form-field>
-        
-        <mat-form-field>
+
+        <mat-form-field appearance="outline">
           <mat-label>E-mail</mat-label>
           <input matInput [(ngModel)]="user.email" name="email">
         </mat-form-field>
-        
-        <button mat-raised-button 
-              color="primary" 
-              type="submit" 
-              (click)="onSubmit()"
-              [disabled]="!isFormValid()">
-              Sauvegarder
+
+        <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!isFormValid()">
+          Sauvegarder
         </button>
-        
-        <button mat-raised-button 
-                type="submit" 
-                (click)="logOut()">
-                Se déconnecter
+
+        <button mat-raised-button type="submit" (click)="logOut()">
+          Se déconnecter
         </button>
-      
+
       </form>
     </mat-card-content>
   </mat-card>
 </div>
 
 <mat-divider class="custom-mat-divider"></mat-divider>
-
 <div>
-  <mat-card>
-    <mat-card-header>
-      <mat-card-title>Abonnements</mat-card-title>
-    </mat-card-header>
-
-    <mat-card-content>
-      <mat-grid-list cols="2" rowHeight="200px">
-        
-        <mat-grid-tile *ngFor="let theme of displayThemes$.value">
-          <div>
-            <h2>{{theme.title}}</h2>
-  
-            <p>{{theme.content}}</p>
-  
-            <button mat-raised-button 
-                    color="warn" 
-                    type="button" 
-                    (click)="onClickUnSubscribe(theme.id)">
-                    Se désabonner
-            </button>
-          </div>
-        </mat-grid-tile>
-        
-      </mat-grid-list>
-    </mat-card-content>
-  </mat-card>
+  <h2>Abonnements</h2>
+  <div class="subsList">
+    <mat-card class="sub" *ngFor="let theme of displayThemes$.value">
+      <mat-card-title>
+        <h2>{{theme.title}}</h2>
+      </mat-card-title>
+      
+      <mat-card-content>
+        <p>{{theme.content}}</p>
+        <button mat-flat-button color="primary" type="button" (click)="onClickUnSubscribe(theme.id)">
+          Se désabonner
+        </button>
+      </mat-card-content>
+    </mat-card>
+  </div>
 </div>
