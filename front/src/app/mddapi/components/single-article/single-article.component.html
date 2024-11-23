@@ -1,5 +1,4 @@
-<app-header></app-header>
-<a href="/auth">
+<a [routerLink]="['/auth']">
     <img class="setupDirection" src="/assets/fleche.png" alt="flecheLogo" />
 </a>
 
@@ -8,7 +7,7 @@
         <h2>{{article.title}}</h2>
         <div class="flex-row unsetMarginLeft">
             <p>{{article.date| date:'mediumDate'}}</p>
-            <p>{{article.user}}</p>
+            <p class="capitalized">{{article.user}}</p>
             <p>{{article.theme}}</p>
         </div>
         <p>{{article.content}}</p>
@@ -24,7 +23,7 @@
     
 </mat-card>
 
-<mat-grid-list cols="1" rowHeight="300px" gutterSize="0px">
+<mat-grid-list cols="1" rowHeight="300px" gutterSize="20px">
     <mat-grid-tile *ngFor="let com of comments">
         <mat-card>
             <mat-card-content>{{com.user}}</mat-card-content>
