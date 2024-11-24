@@ -1,46 +1,56 @@
-<a [routerLink]="['/auth']">
-    <img class="setupDirection" src="/assets/fleche.png" alt="flecheLogo" />
-</a>
+<div class="title">    
+    <h2>
+        <a [routerLink]="['/auth']">
+            <mat-icon>arrow_back</mat-icon>
+        </a>
+        {{article.title}}
+    </h2>
+</div>
 
-<mat-card>
-    <mat-card-content>
-        <h2>{{article.title}}</h2>
-        <div class="flex-row unsetMarginLeft">
-            <p>{{article.date| date:'mediumDate'}}</p>
-            <p class="capitalized">{{article.user}}</p>
-            <p>{{article.theme}}</p>
-        </div>
-        <p>{{article.content}}</p>
-    </mat-card-content>    
-</mat-card>
-        
+<div>
+    <mat-card class="single-article">
+
+        <mat-card-subtitle>
+            <div class="flex-row unsetMarginLeft">
+                <p>{{article.date| date:'mediumDate'}}</p>
+                <p class="capitalized">{{article.user}}</p>
+                <p>{{article.theme}}</p>
+            </div>
+        </mat-card-subtitle>
+
+        <mat-card-content>
+            <p>{{article.content}}</p>
+        </mat-card-content>
+    </mat-card>
+</div>
+
 <mat-divider class="custom-mat-divider"></mat-divider>
 
-<mat-card>
-    <mat-card-header>
-        <mat-card-title>Commentaires</mat-card-title>
-    </mat-card-header>
-    
-</mat-card>
+<div class="commentsList">
+    <h2>Commentaires</h2>
 
-<mat-grid-list cols="1" rowHeight="300px" gutterSize="20px">
-    <mat-grid-tile *ngFor="let com of comments">
-        <mat-card>
-            <mat-card-content>{{com.user}}</mat-card-content>
-            <mat-card-content>
-                <p>{{com.content}}</p>
-            </mat-card-content>
-        </mat-card>
-    </mat-grid-tile>
-</mat-grid-list>
-<mat-form-field class="example-full-width">
-    <mat-label>Ecrivez ici votre commentaire</mat-label>
-    <textarea matInput 
-            [(ngModel)]="comment.content"></textarea>
-    </mat-form-field>
-    <button mat-raised-button 
-                    color="warn" 
-                    type="button" 
-                    (click)="onSubmit()">
-                    Envoyer
-</button>
+    <mat-card class="comments" *ngFor="let com of comments">
+        <mat-card-subtitle>
+            <p class="capitalized">{{com.user}}</p>
+        </mat-card-subtitle>
+        <mat-card-content>
+            <p>{{com.content}}</p>
+        </mat-card-content>
+    </mat-card>
+</div>
+
+<div class="commentArticle">
+    <mat-card class="comment">
+        <mat-card-content>
+            <mat-form-field class="example-full-width">
+                <mat-label>Ecrivez ici votre commentaire</mat-label>
+                <textarea matInput rows="5" [(ngModel)]="comment.content"></textarea>
+            </mat-form-field>
+            
+            <button mat-icon-button class="send" color="primary" type="button" (click)="onSubmit()">
+                <mat-icon>send</mat-icon>
+            </button>
+        </mat-card-content>
+    </mat-card>
+
+</div>

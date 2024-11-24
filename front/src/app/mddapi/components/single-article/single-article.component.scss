@@ -1,5 +1,91 @@
-.setupDirection {
-    transform: rotate(180deg);
-    height: 35px;
-    margin-left: 40px;
+.center {
+    align-items: unset;
+}
+
+.mat-icon {
+    transform: scale(1.5);
+}
+
+mat-card.comment {
+    display: flex;
+    width: 100%;
+}
+
+.send {
+    transform: rotate(-45deg);
+    align-self: center;
+}
+
+.title h2 {
+    display: flex;
+    align-items: center;
+
+    mat-icon {
+        margin-right: 1rem;
+    }
+}
+
+.single-article {
+    background-color: white;
+    padding: 0;
+}
+
+.commentsList {
+    display: flex;
+    flex-direction: column;
+
+    h2 {
+        display: flex;
+        justify-self: left;
+    }
+
+    .comments {
+        background-color: white;
+        display: flex;
+        gap: 1rem;
+        padding: 0;
+        padding-bottom: 1rem;
+
+        .mat-card-subtitle {
+            width: 100px;
+        }
+
+        .mat-card-content {
+            border-radius: 16px;
+            padding: 1rem;
+            width: 100%;
+            background-color: rgb(245, 245, 245);
+        }
+    }
+
+}
+
+.commentArticle {
+    display: flex;
+    justify-content: center;
+
+    ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        padding-bottom: 0;
+    }
+
+    ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+        bottom: 0;
+    }
+}
+
+.commentArticle mat-card-content {
+    display: flex;
+    gap: 1rem;
+
+}
+
+.commentArticle mat-form-field,
+.commentArticle .mat-form-field-infix,
+.commentArticle mat-card-content {
+    width: 100%;
+}
+
+mat-divider {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
 }
