@@ -1,4 +1,4 @@
-<div class="center">
+<div class="center profil-form">
   <mat-card>
     <mat-card-title>
       <h2>Profil utilisateur</h2>
@@ -16,11 +16,11 @@
           <input matInput [(ngModel)]="user.email" name="email">
         </mat-form-field>
 
-        <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!isFormValid()">
+        <button mat-flat-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!isFormValid()">
           Sauvegarder
         </button>
 
-        <button mat-raised-button type="submit" (click)="logOut()">
+        <button mat-flat-button class="red" type="submit" (click)="logOut()">
           Se déconnecter
         </button>
 
@@ -29,8 +29,8 @@
   </mat-card>
 </div>
 
+<div *ngIf="displayThemes$.value.length > 0">
 <mat-divider class="custom-mat-divider"></mat-divider>
-<div>
   <h2>Abonnements</h2>
   <div class="subsList">
     <mat-card class="sub" *ngFor="let theme of displayThemes$.value">

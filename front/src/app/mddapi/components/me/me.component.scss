@@ -5,9 +5,29 @@
     gap: 1rem;
 }
 
+.center {
+    align-items: center;
+}
+
 h2 { 
     display: flex;
     justify-content: center;
+}
+
+.red {
+    color: red;
+}
+
+.profil-form mat-card.mat-card {
+    background-color: white;
+}
+
+mat-card.mat-card {
+
+    .mat-form-field-appearance-outline .mat-form-field-outline {
+                color: rgb(116,81,235);
+
+    }
 }
 
 @media screen and (min-width: 900px) {
