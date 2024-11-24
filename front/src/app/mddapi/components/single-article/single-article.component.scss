@@ -30,6 +30,10 @@ mat-card.comment {
     padding: 0;
 }
 
+.margin-left {
+    margin-left: 40px;
+}
+
 .commentsList {
     display: flex;
     flex-direction: column;
@@ -37,6 +41,7 @@ mat-card.comment {
     h2 {
         display: flex;
         justify-self: left;
+        margin-bottom: 2rem;
     }
 
     .comments {
@@ -63,6 +68,7 @@ mat-card.comment {
 .commentArticle {
     display: flex;
     justify-content: center;
+    margin-top: 2rem;
 
     ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
         padding-bottom: 0;
@@ -86,6 +92,6 @@ mat-card.comment {
 }
 
 mat-divider {
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
