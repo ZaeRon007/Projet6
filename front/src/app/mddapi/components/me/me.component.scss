@@ -9,9 +9,15 @@
     align-items: center;
 }
 
-.profil-form h2 { 
+.profil-form h2, .profil-me-subs h2 { 
     display: flex;
     justify-content: center;
+}
+
+
+
+.custom-mat-divider {
+    margin-bottom: 2rem;
 }
 
 .red {
