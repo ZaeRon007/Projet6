@@ -34,12 +34,11 @@ a, text {
 .center {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: column;
 }
 
 input {
-    height: 30px; 
+    height: 20px; 
     border-width: 1px;   
     border-radius: 5px;
 }
@@ -65,10 +64,6 @@ button[attr="mat-button"] {
     margin-bottom: 15px;
 }
 
-/* ANGULAR MATERIAL COMPONENTS */
-
-
-/* GRID LIST */
 mat-card.mat-card {
     box-shadow: none !important;
     background-color: rgb(245, 245, 245);
@@ -122,16 +117,4 @@ mat-card.mat-card {
 .custom-mat-divider {
     width: 80%;
     justify-self: center;
-}
-
-
-
-/* FORMULAIRE */
-
-mat-card-content {
-    mat-form-field {
-        // border: 1px;
-        border-color: rgb(116,81,235);
-        border-radius: 16px;
-    }
 }
