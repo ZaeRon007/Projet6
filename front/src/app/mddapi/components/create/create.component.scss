@@ -3,3 +3,22 @@
     height: 35px;
     margin-left: 40px;
 }
+
+.center {
+    flex-direction: row;
+    align-items: unset;
+
+    a {
+        margin-right: auto;
+        margin-left: 0;
+    }
+
+    mat-card {
+        margin: 0 auto;
+    }
+}
+
+.mat-form-field-appearance-outline .mat-form-field-outline {
+    color: rgb(116,81,235);
+
+}

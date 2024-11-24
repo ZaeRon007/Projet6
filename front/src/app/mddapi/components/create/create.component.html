@@ -1,12 +1,12 @@
-<a [routerLink]="['/auth']">
-  <img class="setupDirection" src="/assets/fleche.png" alt="flecheLogo" />
-</a>
 <div class="center">
+  <a [routerLink]="['/auth']">
+    <mat-icon>arrow_back</mat-icon>
+  </a>
   <mat-card>
-
-    <mat-card-header>
-      <mat-card-title>Créer un nouvel article</mat-card-title>
-    </mat-card-header>
+    
+    <mat-card-title>
+      <h2>Créer un nouvel article</h2>
+      </mat-card-title>
 
     <mat-card-content>
       <form class="flex-column">
@@ -31,7 +31,7 @@
                   [(ngModel)]="article.content" name="content">
         </mat-form-field>
         
-        <button mat-raised-button color="primary" type="submit" 
+        <button mat-flat-button color="primary" type="submit" 
               (click)="onSubmit()"
               [disabled]="!isFormValid()">
               Créer
