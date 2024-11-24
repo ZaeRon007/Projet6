@@ -68,6 +68,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatDividerModule,
     MatCardModule,
     MatButtonModule,
+    MatIconModule,
 
   ]
 })

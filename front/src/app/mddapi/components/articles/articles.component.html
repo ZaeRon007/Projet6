@@ -2,7 +2,8 @@
     <button mat-flat-button class="button-violet gap" color="primary" (click)="create()">Créer un article</button>
     <div class="sortDiv" (click)="sortByDate()">
         <p>Trier par Date</p>
-        <img [ngClass]="ascendant?'arrowUp':'arrowDown'" src="/assets/fleche.png" alt="logoFleche">
+        <mat-icon *ngIf="ascendant">arrow_upward</mat-icon>
+        <mat-icon *ngIf="!ascendant">arrow_downward</mat-icon>
     </div>
 </div>
 <div class="articleList">
