@@ -5,7 +5,7 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     text-transform: capitalize;
 }
 
-a, text {
+a, text, p {
     color: black;
 }
 
@@ -115,6 +115,6 @@ mat-card.mat-card {
 }
 
 .custom-mat-divider {
-    width: 80%;
+    width: 95%;
     justify-self: center;
 }
