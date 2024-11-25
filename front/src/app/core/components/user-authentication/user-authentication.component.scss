@@ -1,5 +1,5 @@
 .user-auth-center {
-    height: 96.5vh;
+    height: 95.5vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -15,8 +15,9 @@
         flex-direction: column;
     }
 
-    .user-auth-center .logo {
-        transform: scale(0.75);
-        margin-bottom: -60px;
+    .user-auth-center img {
+        height: 230px;
+        width: 320px;
+        margin-bottom: -10px;
     }
 }
