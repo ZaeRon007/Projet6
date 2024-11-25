@@ -1,26 +1,28 @@
 <app-header></app-header>
-<a [routerLink]="['/auth']">
-    <mat-icon>arrow_back</mat-icon>
-</a>
+<div class="user-login-title">
+    <a [routerLink]="['/auth']">
+        <mat-icon>arrow_back</mat-icon>
+    </a>
+    <h2>
+        Se connecter
+    </h2>
+</div>
 <div class="center">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Se connecter</mat-card-title>
-        </mat-card-header>
+    <mat-card class="user-login-form">
     
         <mat-card-content>
             <form class="flex-column">
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>E-mail ou nom d'utilisateur</mat-label>
                     <input matInput [(ngModel)]="username" name="username">
                 </mat-form-field>                       
                 
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>Mot de passe</mat-label>
                     <input matInput [(ngModel)]="user.password" type="password" name="password">
                 </mat-form-field>
                 
-                <button mat-raised-button                 
+                <button mat-flat-button                 
                 color="primary" 
                 type="submit" 
                 (click)="onSubmit()"
