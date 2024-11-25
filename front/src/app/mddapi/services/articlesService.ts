@@ -95,7 +95,7 @@ export class ArticleService {
       
             }),
             map((nestedArticles: DisplayArticle[][]) => {
-              return nestedArticles.flat();// Aplatissement des tableaux imbriqués
+              return nestedArticles.flat();
             })
           ); 
     }
@@ -122,14 +122,6 @@ export class ArticleService {
             })
           );
     }
-
-    // public getSubscriptionListForUser() {
-    //     return this.getAllSubscribes().pipe(
-    //   map((subscriptions: SubscribeEntity[]) => {
-    //     return subscriptions.map(subcription => subcription.themeId);
-    //   })
-    // );
-    // }
 
     public setupDisplayThemes() {
       return this.themeService.fetch().pipe(

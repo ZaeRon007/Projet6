@@ -54,8 +54,8 @@ export class ThemesComponent implements OnInit, OnDestroy {
   isSubscribedToTheme(id: number): Observable<boolean> {
     return this.subscribedThemes$.pipe(
       map(themes => {
-        const theme = themes.find(theme => theme.id === id); // Trouver le thème correspondant
-        return theme ? theme.subscribed : false; // Retourner true ou false selon le cas
+        const theme = themes.find(theme => theme.id === id);
+        return theme ? theme.subscribed : false;
       })
     );
   }
