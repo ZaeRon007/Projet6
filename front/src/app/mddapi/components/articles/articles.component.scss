@@ -45,3 +45,14 @@ p {
         width: calc(50% - 40px);
     }
 }
+
+@media screen and (max-width: 900px) {
+    .button-container{
+        flex-direction: column;
+    }
+
+    .sortDiv {
+        margin-top: 1rem;
+        margin-bottom: 1rem;
+    }
+}
