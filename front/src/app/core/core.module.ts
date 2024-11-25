@@ -28,12 +28,10 @@ import { UserAuthenticationComponent } from './components/user-authentication/us
   declarations: [
     HeaderComponent,
     LandingPageComponent,
-    UserLoginComponent,
-    UserRegisterComponent,
     NotFoundComponent,
-    UserRegisterComponent,
     UserAuthenticationComponent,
     UserLoginComponent,
+    UserRegisterComponent,
     
   ],
   imports: [
@@ -60,6 +58,7 @@ import { UserAuthenticationComponent } from './components/user-authentication/us
   exports: [
     HeaderComponent,
     LandingPageComponent,
+    NotFoundComponent,
     UserAuthenticationComponent,
     UserLoginComponent,
     UserRegisterComponent,
@@ -71,7 +70,6 @@ import { UserAuthenticationComponent } from './components/user-authentication/us
     MatCardModule,
     MatButtonModule,
     MatIconModule,
-
   ]
 })
 export class CoreModule { 
