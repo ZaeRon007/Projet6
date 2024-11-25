@@ -9,7 +9,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { userAuthenticationComponent } from './components/userAuthentication/userAuthentication.component';
 import { userLoginComponent } from './components/userLogin/userLogin.component';
-import { userRegisterComponent } from './components/userRegister/userRegister.component';
 import { FormsModule } from '@angular/forms';
 import { CoreRoutingModule } from './core-routing.module';
 import { UnAuthGuard } from './guards/unauth.guard';
@@ -22,6 +21,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { UserRegisterComponent } from './components/user-register/user-register.component';
 
 
 @NgModule({
@@ -30,8 +30,9 @@ import { MatButtonModule } from '@angular/material/button';
     LandingPageComponent,
     userAuthenticationComponent,
     userLoginComponent,
-    userRegisterComponent,
+    UserRegisterComponent,
     NotFoundComponent,
+    UserRegisterComponent,
     
   ],
   imports: [
@@ -60,7 +61,7 @@ import { MatButtonModule } from '@angular/material/button';
     LandingPageComponent,
     userAuthenticationComponent,
     userLoginComponent,
-    userRegisterComponent,
+    UserRegisterComponent,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,

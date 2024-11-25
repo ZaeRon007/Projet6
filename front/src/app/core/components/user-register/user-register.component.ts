@@ -1,15 +1,15 @@
-import { Component, OnDestroy } from '@angular/core';
-import { AuthRequest } from 'src/app/core/models/auth.interface';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
 import { Subscription } from 'rxjs';
+import { AuthRequest } from '../../models/auth.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-userRegister',
-  templateUrl: './userRegister.component.html',
-  styleUrls: ['./userRegister.component.scss']
+  selector: 'app-user-register',
+  templateUrl: './user-register.component.html',
+  styleUrls: ['./user-register.component.scss']
 })
-export class userRegisterComponent implements OnDestroy{
+export class UserRegisterComponent implements OnDestroy{
   user: AuthRequest = {email: "", name: "", password: ""};
   registerSubscription: Subscription = new Subscription();
 
