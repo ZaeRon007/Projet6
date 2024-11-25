@@ -27,23 +27,24 @@
 
     <div class="commentsList">
         <h2>Commentaires</h2>
-
-        <mat-card class="comments" *ngFor="let com of comments">
-            <mat-card-subtitle>
-                <p class="capitalized">{{com.user}}</p>
-            </mat-card-subtitle>
-            <mat-card-content>
-                <p>{{com.content}}</p>
-            </mat-card-content>
-        </mat-card>
+        <div *ngIf="comments.length != 0">
+            <mat-card class="comments" *ngFor="let com of comments">
+                <mat-card-subtitle>
+                    <p class="capitalized">{{com.user}}</p>
+                </mat-card-subtitle>
+                <mat-card-content>
+                    <p class="overHeight">{{com.content}}</p>
+                </mat-card-content>
+            </mat-card>
+        </div>
     </div>
 
     <div class="commentArticle">
         <mat-card class="comment">
             <mat-card-content>
-                <mat-form-field class="example-full-width">
+                <mat-form-field class="comment-border" appearance="outline">
                     <mat-label>Ecrivez ici votre commentaire</mat-label>
-                    <textarea matInput rows="5" [(ngModel)]="comment.content"></textarea>
+                    <input class="overCommentHeight" matInput [(ngModel)]="comment.content">
                 </mat-form-field>
 
                 <button mat-icon-button class="send" color="primary" type="button" (click)="onSubmit()">

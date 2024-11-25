@@ -13,7 +13,7 @@ import { DisplayComment } from 'src/app/core/models/dto/displayComment';
 })
 export class SingleArticleComponent implements OnInit, OnDestroy {
   article: DisplayArticle = new DisplayArticle;
-  comments: DisplayComment[] = [new DisplayComment];
+  comments: DisplayComment[] = [];
   comment: DisplayComment = new DisplayComment();
   private articleSubscription: Subscription = new Subscription();
   private commentSubscription: Subscription = new Subscription();

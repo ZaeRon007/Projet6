@@ -9,11 +9,28 @@
 mat-card.comment {
     display: flex;
     width: 100%;
+
+}
+
+.commentArticle .comment {
+    background-color: white;
+
+    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+        color: black;
+    }
 }
 
 .send {
     transform: rotate(-45deg);
     align-self: center;
+}
+
+.overHeight {
+    height: 50px;
+}
+
+.overCommentHeight {
+    height: 150px;
 }
 
 .title h2 {
