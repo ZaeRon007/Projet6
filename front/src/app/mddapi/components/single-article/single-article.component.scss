@@ -1,114 +1,114 @@
-.center {
-    align-items: unset;
-}
+.single-article-title {
 
-.mat-icon {
-    transform: scale(1.5);
-}
-
-mat-card.comment {
-    display: flex;
-    width: 100%;
-
-}
-
-.commentArticle .comment {
-    background-color: white;
-
-    ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
-        color: black;
+    .mat-icon {
+        transform: scale(1.5);
     }
-}
 
-.send {
-    transform: rotate(-45deg);
-    align-self: center;
-}
+    h2 {
+        display: flex;
+        align-items: center;
 
-.overHeight {
-    height: 50px;
-}
-
-.overCommentHeight {
-    height: 150px;
-}
-
-.title h2 {
-    display: flex;
-    align-items: center;
-
-    mat-icon {
-        margin-right: 1rem;
+        mat-icon {
+            margin-right: 1rem;
+        }
     }
-}
 
-.single-article {
-    background-color: white;
-    padding: 0;
+
 }
 
 .margin-left {
     margin-left: 40px;
-}
 
-.commentsList {
-    display: flex;
-    flex-direction: column;
+    .single-article {
+        background-color: white;
+        padding: 0;
 
-    h2 {
-        display: flex;
-        justify-self: left;
+    }
+
+    mat-divider {
+        margin-top: 2rem;
         margin-bottom: 2rem;
     }
 
-    .comments {
-        background-color: white;
+    .commentsList {
         display: flex;
-        gap: 1rem;
-        padding: 0;
-        padding-bottom: 1rem;
+        flex-direction: column;
 
-        .mat-card-subtitle {
-            width: 100px;
+        h2 {
+            display: flex;
+            justify-self: left;
+            margin-bottom: 2rem;
         }
 
-        .mat-card-content {
-            border-radius: 16px;
-            padding: 1rem;
+        .comments {
+            background-color: white;
+            display: flex;
+            gap: 1rem;
+            padding: 0;
+            padding-bottom: 1rem;
+
+            .mat-card-subtitle {
+                width: 100px;
+            }
+
+            .mat-card-content {
+                border-radius: 16px;
+                padding: 1rem;
+                width: 100%;
+                background-color: rgb(245, 245, 245);
+            }
+
+            .overHeight {
+                height: 50px;
+            }
+
+        }
+
+    }
+
+    .commentArticle {
+        display: flex;
+        justify-content: center;
+        margin-top: 2rem;
+
+        mat-form-field,
+        .mat-form-field-infix,
+        mat-card-content {
             width: 100%;
-            background-color: rgb(245, 245, 245);
+        }
+
+        ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+            padding-bottom: 0;
+        }
+
+        ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+            bottom: 0;
+        }
+
+        .comment {
+            background-color: white;
+            display: flex;
+            width: 100%;
+
+            ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
+                color: black;
+            }
+
+            .send {
+                transform: rotate(-45deg);
+                align-self: center;
+            }
+
+            .overCommentHeight {
+                height: 150px;
+            }
+        }
+
+        mat-card-content {
+            display: flex;
+            gap: 1rem;
+
         }
     }
 
-}
-
-.commentArticle {
-    display: flex;
-    justify-content: center;
-    margin-top: 2rem;
-
-    ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
-        padding-bottom: 0;
-    }
-
-    ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
-        bottom: 0;
-    }
-}
-
-.commentArticle mat-card-content {
-    display: flex;
-    gap: 1rem;
-
-}
-
-.commentArticle mat-form-field,
-.commentArticle .mat-form-field-infix,
-.commentArticle mat-card-content {
-    width: 100%;
-}
-
-mat-divider {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
 }

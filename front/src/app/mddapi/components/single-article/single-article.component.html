@@ -1,5 +1,5 @@
 <app-full-header></app-full-header>
-<div class="title">
+<div class="single-article-title">
     <h2>
         <a [routerLink]="['/auth']">
             <mat-icon>arrow_back</mat-icon>
@@ -12,7 +12,7 @@
     <mat-card class="single-article">
 
         <mat-card-subtitle>
-            <div class="flex-row unsetMarginLeft">
+            <div class="flex-row">
                 <p>{{article.date| date:'mediumDate'}}</p>
                 <p class="capitalized">{{article.user}}</p>
                 <p>{{article.theme}}</p>
