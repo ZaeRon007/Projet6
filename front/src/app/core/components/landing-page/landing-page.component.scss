@@ -1,7 +1,14 @@
 .landing-page-center {
-  height: 100vh;
+  height: 90vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+}
+
+@media screen and (max-width: 900px) {
+  .landing-page-center img {
+    height: 230px;
+    width: 320px;
+  }
 }
