@@ -12,36 +12,37 @@
 
 .center {
     display: unset;
-}
-
-.create-component {
-    background-color: white;
-    justify-self: center;
-    width: 25%;
-}
-
-.create-component-form {
-    align-items: center;
-
-    ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
-                color: rgb(116,81,235);
-
-    }
-
-    ::ng-deep.mat-form-field-wrapper {
-        padding-bottom: 10px;
-    }
-            
-    button.mat-flat-button {
-        display: flex;
+    
+    .create-component {
+        background-color: white;
         justify-self: center;
-        justify-content: center;
-        width: 50%;
-        align-items: center;
+        width: 25%;
+    
+        .create-component-form {
+            align-items: center;
+        
+            ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+                        color: rgb(116,81,235);
+        
+            }
+        
+            ::ng-deep.mat-form-field-wrapper {
+                padding-bottom: 10px;
+            }
+                    
+            button.mat-flat-button {
+                display: flex;
+                justify-self: center;
+                justify-content: center;
+                width: 50%;
+                align-items: center;
+            }
+        
+            .oversized {
+                height: 120px;
+            }
+        
+        }
     }
-
-    .oversized {
-        height: 120px;
-    }
-
 }
+
