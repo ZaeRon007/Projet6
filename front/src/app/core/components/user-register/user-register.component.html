@@ -1,31 +1,32 @@
 <app-header></app-header>
-<a [routerLink]="['/auth']">
-    <mat-icon>arrow_back</mat-icon>
-</a>
+<div class="user-register-title">
+    <a [routerLink]="['/auth']">
+        <mat-icon>arrow_back</mat-icon>
+    </a>
+    <h2>
+        Inscription
+    </h2>
+</div>
 <div class="center">
-    <mat-card>
-        <mat-card-header>
-            <mat-card-title>Inscription</mat-card-title>
-        </mat-card-header>
-        
+    <mat-card class="user-register-form">        
         <mat-card-content>
             <form class="flex-column">
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>Nom d'utilisateur</mat-label>
                     <input matInput [(ngModel)]="user.name" name="name">
                 </mat-form-field>
                 
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>Adresse e-mail</mat-label>
                     <input matInput [(ngModel)]="user.email" name="email">                
                 </mat-form-field>
                 
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>Mot de passe</mat-label>
                     <input matInput [(ngModel)]="user.password" type="password" name="password">
                 </mat-form-field>
                 
-                <button mat-raised-button 
+                <button mat-flat-button 
                         color="primary" 
                         type="submit" 
                         (click)="onSubmit()"
