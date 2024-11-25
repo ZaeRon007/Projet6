@@ -8,7 +8,6 @@ import { AuthGuard } from './guards/auth.guard';
 import { HttpClientModule } from '@angular/common/http';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { userAuthenticationComponent } from './components/userAuthentication/userAuthentication.component';
-import { userLoginComponent } from './components/userLogin/userLogin.component';
 import { FormsModule } from '@angular/forms';
 import { CoreRoutingModule } from './core-routing.module';
 import { UnAuthGuard } from './guards/unauth.guard';
@@ -22,6 +21,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
+import { UserAuthenticationComponent } from './components/user-authentication/user-authentication.component';
+import { UserLoginComponent } from './components/user-login/user-login.component';
 
 
 @NgModule({
@@ -29,10 +30,12 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     HeaderComponent,
     LandingPageComponent,
     userAuthenticationComponent,
-    userLoginComponent,
+    UserLoginComponent,
     UserRegisterComponent,
     NotFoundComponent,
     UserRegisterComponent,
+    UserAuthenticationComponent,
+    UserLoginComponent,
     
   ],
   imports: [
@@ -60,7 +63,7 @@ import { UserRegisterComponent } from './components/user-register/user-register.
     HeaderComponent,
     LandingPageComponent,
     userAuthenticationComponent,
-    userLoginComponent,
+    UserLoginComponent,
     UserRegisterComponent,
     MatFormFieldModule,
     MatSelectModule,

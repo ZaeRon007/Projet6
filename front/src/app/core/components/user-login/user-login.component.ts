@@ -1,18 +1,15 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from 'src/app/core/services/auth.service';
-import { AuthRequest } from 'src/app/core/models/auth.interface';
-import { environment } from 'src/environments/environment.prod';
 import { Subscription } from 'rxjs';
-
+import { AuthRequest } from '../../models/auth.interface';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
-  selector: 'app-userLogin',
-  templateUrl: './userLogin.component.html',
-  styleUrls: ['./userLogin.component.scss']
+  selector: 'app-user-login',
+  templateUrl: './user-login.component.html',
+  styleUrls: ['./user-login.component.scss']
 })
-export class userLoginComponent implements OnDestroy {
+export class UserLoginComponent implements OnDestroy {
   user: AuthRequest = {email: "", name: "", password: ""};
   logInSubscription: Subscription = new Subscription();
   username: string = "";
