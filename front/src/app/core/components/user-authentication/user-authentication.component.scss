@@ -1,21 +1,21 @@
-.flex-row {
-    gap: 50px;
-}
-
-.center {
+.user-auth-center {
     height: 96.5vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    .flex-row {
+        gap: 50px;
+    }
 }
 
-@media screen and (max-width: 750px) {
-    .flex-row {
+@media screen and (max-width: 900px) {
+    .user-auth-center .flex-row {
         flex-direction: column;
     }
 
-    .logo {
+    .user-auth-center .logo {
         transform: scale(0.75);
         margin-bottom: -60px;
     }
