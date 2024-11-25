@@ -10,50 +10,54 @@
     }
 
     .centerLogo {
-        display: none;
         justify-self: center;
-        transform: scale(0.35);
-        margin-bottom: -140px;
-        margin-top: -140px;
+        height: 160px;
+        width: 250px;
+        margin-bottom: -20px;
     }
 }
 
 
 .center {
-    align-items: center;
+    display: unset;
 
-    .user-login-form {
+    .user-login {
         background-color: white;
         justify-self: center;
         width: 25%;
-        align-items: center;
 
-        ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
-            color: rgb(116, 81, 235);
-
-        }
-
-        .flex-column {
-            display: grid;
-        }
-
-
-        button.mat-flat-button {
-            display: flex;
-            justify-self: center;
-            justify-content: center;
-            width: 50%;
+        .user-login-form {
             align-items: center;
+    
+            ::ng-deep.mat-form-field-appearance-outline .mat-form-field-outline {
+                color: rgb(116, 81, 235);
+    
+            }
+            
+            button.mat-flat-button {
+                display: flex;
+                justify-self: center;
+                justify-content: center;
+                width: 50%;
+                align-items: center;
+                min-width: 126px;
+            }
+                        
+            .flex-column {
+                display: grid;
+            }
         }
+    }
+
+}
+
+@media screen and (min-width: 900px) {
+    .user-login-title .centerLogo {
+        display: none;
     }
 }
 
-
 @media screen and (max-width: 900px) {
-    .user-login-title .centerLogo {
-        display: unset;
-    }
-
     app-simple-header {
         display: none;
     }
