@@ -8,5 +8,15 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-  }
-  
+}
+
+@media screen and (max-width: 750px) {
+    .flex-row {
+        flex-direction: column;
+    }
+
+    .logo {
+        transform: scale(0.75);
+        margin-bottom: -60px;
+    }
+}
