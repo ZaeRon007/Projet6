@@ -1,5 +1,5 @@
 <app-full-header></app-full-header>
-<div class="flex-row button-container">
+<div class="flex-row articles-button-container">
     <button mat-flat-button class="button-violet gap" color="primary" (click)="create()">Créer un article</button>
     <div class="sortDiv" (click)="sortByDate()">
         <p>Trier par Date</p>
@@ -7,7 +7,7 @@
         <mat-icon *ngIf="!ascendant">arrow_downward</mat-icon>
     </div>
 </div>
-<div class="articleList">
+<div class="article-list">
     <mat-card class="article" *ngFor="let article of articles" [routerLink]="['/articles/view', article.id]">
         <mat-card-title>
             <h2>{{article.title}}</h2>
