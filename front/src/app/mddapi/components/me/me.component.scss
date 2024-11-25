@@ -1,38 +1,47 @@
-.subsList {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 1rem;
+.profil-form {
+    
+    h2 {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .center {
+        align-items: center;
+    }
+    
+    .red {
+        color: red;
+    }
+
+    mat-card.mat-card {
+        background-color: white;
+    }
+
+    mat-card.mat-card {
+    
+        .mat-form-field-appearance-outline .mat-form-field-outline {
+            color: rgb(116, 81, 235);
+    
+        }
+    }
 }
 
-.center {
-    align-items: center;
-}
+.profil-me-subs {
+    
+    .subsList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+    }
 
-.profil-form h2, .profil-me-subs h2 { 
-    display: flex;
-    justify-content: center;
-}
+    h2 {
+        display: flex;
+        justify-content: center;
+    }
 
-
-
-.custom-mat-divider {
-    margin-bottom: 2rem;
-}
-
-.red {
-    color: red;
-}
-
-.profil-form mat-card.mat-card {
-    background-color: white;
-}
-
-.profil-form mat-card.mat-card {
-
-    .mat-form-field-appearance-outline .mat-form-field-outline {
-                color: rgb(116,81,235);
-
+    .custom-mat-divider {
+        margin-bottom: 2rem;
     }
 }
 
