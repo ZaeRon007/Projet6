@@ -8,27 +8,30 @@
         Inscription
     </h2>
 </div>
-<mat-card class="user-register-form">
-    <mat-card-content>
-        <form class="flex-column">
-            <mat-form-field appearance="outline">
-                <mat-label>Nom d'utilisateur</mat-label>
-                <input matInput [(ngModel)]="user.name" name="name">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Adresse e-mail</mat-label>
-                <input matInput [(ngModel)]="user.email" name="email">
-            </mat-form-field>
-
-            <mat-form-field appearance="outline">
-                <mat-label>Mot de passe</mat-label>
-                <input matInput [(ngModel)]="user.password" type="password" name="password">
-            </mat-form-field>
-
-            <button mat-flat-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!isFormValid()">
-                S'inscrire
-            </button>
-        </form>
-    </mat-card-content>
-</mat-card>
+<div class="center">
+    <mat-card class="user-register">
+        <mat-card-content>
+            <form class="user-register-form flex-column">
+                
+                <mat-form-field appearance="outline">
+                    <mat-label>Nom d'utilisateur</mat-label>
+                    <input matInput [(ngModel)]="user.name" name="name">
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Adresse e-mail</mat-label>
+                    <input matInput [(ngModel)]="user.email" name="email">
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Mot de passe</mat-label>
+                    <input matInput [(ngModel)]="user.password" type="password" name="password">
+                </mat-form-field>
+    
+                <button mat-flat-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!isFormValid()">
+                    S'inscrire
+                </button>
+            </form>
+        </mat-card-content>
+    </mat-card>
+</div>
