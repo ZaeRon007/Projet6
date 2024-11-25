@@ -1,7 +1,6 @@
 import { LOCALE_ID, NgModule } from '@angular/core';
 import { CommonModule, registerLocaleData } from '@angular/common';
 import * as fr from '@angular/common/locales/fr'
-import { HeaderComponent } from './components/header/header.component';
 import { RouterModule } from '@angular/router';
 import { HttpInterceptorProviders } from './interceptors';
 import { AuthGuard } from './guards/auth.guard';
@@ -23,15 +22,18 @@ import { UserRegisterComponent } from './components/user-register/user-register.
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { UserAuthenticationComponent } from './components/user-authentication/user-authentication.component';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { SimpleHeaderComponent } from './components/headers/simple-header/simple-header.component';
+import { FullHeaderComponent } from './components/headers/full-header/full-header.component';
 
 @NgModule({
   declarations: [
-    HeaderComponent,
     LandingPageComponent,
     NotFoundComponent,
     UserAuthenticationComponent,
     UserLoginComponent,
     UserRegisterComponent,
+    SimpleHeaderComponent,
+    FullHeaderComponent,
     
   ],
   imports: [
@@ -57,12 +59,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     HttpInterceptorProviders
   ],
   exports: [
-    HeaderComponent,
     LandingPageComponent,
     NotFoundComponent,
     UserAuthenticationComponent,
     UserLoginComponent,
     UserRegisterComponent,
+    SimpleHeaderComponent,
+    FullHeaderComponent,
     MatFormFieldModule,
     MatSelectModule,
     MatInputModule,

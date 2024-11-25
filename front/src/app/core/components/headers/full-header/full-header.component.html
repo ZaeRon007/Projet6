@@ -1,16 +1,16 @@
-<div *ngIf="isLoggedIn()">
+<div class="full-header">
     <div class="flex-row space-btwn">
         <a [routerLink]="['/articles/home']">
             <img class="mdd_logo" src="/assets/logo_p6.png" alt="mddapi_logo" />
         </a>
-        <div class="flex-row align-items toHide">
+        <div *ngIf="isLoggedIn()" class="flex-row align-items fullSize">
             <a [routerLink]="['/articles/home']" routerLinkActive="active" class="gap">Articles</a>
             <a [routerLink]="['/articles/themes']" routerLinkActive="active" class="gap">Thèmes</a>
             <button mat-icon-button [routerLink]="['/profile/me']" routerLinkActive="active" class="profile">
                 <mat-icon>account_circle</mat-icon>
             </button>
         </div>
-        <div class="toShow">
+        <div *ngIf="isLoggedIn()" class="smallSize">
             <button mat-icon-button (click)="openMenu()">
                 <mat-icon>menu</mat-icon>
             </button>
@@ -26,7 +26,6 @@
                         </button>
                     </div>
                 </mat-sidenav>
-                <!-- <mat-sidenav-content>Main content</mat-sidenav-content> -->
             </mat-sidenav-container>
         </div>
 

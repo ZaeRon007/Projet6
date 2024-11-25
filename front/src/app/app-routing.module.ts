@@ -6,10 +6,10 @@ import { LandingPageComponent } from './core/components/landing-page/landing-pag
 
 const routes: Routes = [
   { path: '', component: LandingPageComponent, canActivate: [UnAuthGuard], data: {header: null}},
-  { path: 'auth', loadChildren: () => import('./core/core.module').then(m => m.CoreModule), canActivate: [UnAuthGuard], data: {header: 'simple'}},
+  { path: 'auth', loadChildren: () => import('./core/core.module').then(m => m.CoreModule), canActivate: [UnAuthGuard]},
 
-  { path: 'articles', loadChildren: () => import('./mddapi/mddapi.module').then(m => m.MddapiModule), canActivate: [AuthGuard], data: {header: 'full'}},
-  { path: 'profile', loadChildren: () => import('./mddapi/mddapi.module').then(m => m.MddapiModule), canActivate: [AuthGuard], data: {header: 'full'}},
+  { path: 'articles', loadChildren: () => import('./mddapi/mddapi.module').then(m => m.MddapiModule), canActivate: [AuthGuard]},
+  { path: 'profile', loadChildren: () => import('./mddapi/mddapi.module').then(m => m.MddapiModule), canActivate: [AuthGuard]},
 
   { path: '**', redirectTo: '404'},
 ];
