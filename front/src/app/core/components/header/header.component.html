@@ -3,15 +3,34 @@
         <a [routerLink]="['/articles/home']">
             <img class="mdd_logo" src="/assets/logo_p6.png" alt="mddapi_logo" />
         </a>
-        <div class="flex-row align-items">
+        <div class="flex-row align-items toHide">
             <a [routerLink]="['/articles/home']" routerLinkActive="active" class="gap">Articles</a>
             <a [routerLink]="['/articles/themes']" routerLinkActive="active" class="gap">Thèmes</a>
             <button mat-icon-button [routerLink]="['/profile/me']" routerLinkActive="active" class="profile">
                 <mat-icon>account_circle</mat-icon>
             </button>
         </div>
+        <div class="toShow">
+            <button mat-icon-button (click)="openMenu()">
+                <mat-icon>menu</mat-icon>
+            </button>
+            <mat-sidenav-container *ngIf="flagMenu" class="sideNavContainer">
+                <mat-sidenav class="organize" mode="side" opened>
+                    <div class="flex-column">
+                        <a (click)="closeSideNav()" [routerLink]="['/articles/home']" routerLinkActive="active" class="gap">Articles</a>
+                        <a (click)="closeSideNav()" [routerLink]="['/articles/themes']" routerLinkActive="active" class="gap">Thèmes</a>
+                    </div>
+                    <div class="profile-button">
+                        <button mat-icon-button (click)="closeSideNav()" [routerLink]="['/profile/me']" routerLinkActive="active" class="profile">
+                            <mat-icon>account_circle</mat-icon>
+                        </button>
+                    </div>
+                </mat-sidenav>
+                <!-- <mat-sidenav-content>Main content</mat-sidenav-content> -->
+            </mat-sidenav-container>
+        </div>
+
     </div>
 
     <mat-divider></mat-divider>
 </div>
-

@@ -22,7 +22,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { UserRegisterComponent } from './components/user-register/user-register.component';
 import { UserLoginComponent } from './components/user-login/user-login.component';
 import { UserAuthenticationComponent } from './components/user-authentication/user-authentication.component';
-
+import { MatSidenavModule } from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
@@ -48,6 +48,7 @@ import { UserAuthenticationComponent } from './components/user-authentication/us
     MatCardModule,
     MatDividerModule,
     MatIconModule,
+    MatSidenavModule,
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'fr-FR' },
