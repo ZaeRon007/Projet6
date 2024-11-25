@@ -1,40 +1,40 @@
-<div class="center">
+<div class="create-component-title">
   <a [routerLink]="['/auth']">
     <mat-icon>arrow_back</mat-icon>
   </a>
-  <mat-card>
-    
-    <mat-card-title>
-      <h2>Créer un nouvel article</h2>
-      </mat-card-title>
+  <h2>
+    Créer un nouvel article
+  </h2>
+</div>
+
+<div class="center">
+  <mat-card class="create-component">
 
     <mat-card-content>
-      <form class="flex-column">
+      <form class="create-component-form flex-column">
 
-        <mat-form-field>
-          <mat-select placeholder="Thème" 
-                      [(ngModel)]="article.themeId"
-                      name="theme">
+        <mat-form-field appearance="outline">
+          <mat-label>Thème</mat-label>
+          <mat-select [(ngModel)]="article.themeId" name="theme">
             <mat-option *ngFor="let option of options" [value]="option.id">
               {{ option.name }}
             </mat-option>
           </mat-select>
         </mat-form-field>
-        
-        <mat-form-field>
-          <input matInput placeholder="Titre"
-                  [(ngModel)]="article.title" name="title">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Titre</mat-label>
+          <input matInput [(ngModel)]="article.title" name="title">
         </mat-form-field>
-        
-        <mat-form-field>
-          <input matInput placeholder="Contenu"
-                  [(ngModel)]="article.content" name="content">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Contenu</mat-label>
+          <!-- <textarea matInput rows="5" [(ngModel)]="article.content" name="content"></textarea> -->
+          <input class="oversized" matInput [(ngModel)]="article.content" name="content">
         </mat-form-field>
-        
-        <button mat-flat-button color="primary" type="submit" 
-              (click)="onSubmit()"
-              [disabled]="!isFormValid()">
-              Créer
+
+        <button mat-flat-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!isFormValid()">
+          Créer
         </button>
       </form>
     </mat-card-content>
