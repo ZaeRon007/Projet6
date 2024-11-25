@@ -1,25 +1,82 @@
-# P6-Full-Stack-reseau-dev
+# Application MDDAPI
+## Installation des outils (Linux) : 
 
-## Front
+### Java & Maven : 
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+* Installation de java : `sudo apt install openjdk-21-jdk`
 
-Don't forget to install your node_modules before starting (`npm install`).
+* Télécharger la version de maven 3.9.9 sur le site https://maven.apache.org/download.cgi
 
-### Development server
+* installer maven dans le répertoire /opt : 
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+`cd ~/Téléchargements`
 
-### Build
+`unzip apache-maven-3.9.9-bin.zip`
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+`cd apache-maven-3.9.9-bin/`    
 
-### Where to start
+`sudo mv apache-maven-3.9.9 /opt`
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+* ajouter java & maven au path : 
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+`gedit ~/.profile`
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
+Ajouter les lignes suivantes en fin de fichier : 
 
-Good luck!
+`#java path`
+
+`export JAVA_HOME="/usr/lib/jvm/java-8-openjdk-amd64/"`
+
+`#maven path`
+
+`export MAVEN_HOME="/opt/apache-maven-3.8.8/"`
+
+`export M2_HOME="/opt/apache-maven-3.8.8/"`
+
+`export PATH=${M2_HOME}/bin:${PATH}`
+
+### Mysql : 
+
+`sudo apt install mysql-server`
+
+`sudo mysql -u root -p`
+
+`CREATE DATABASE yoga;`
+
+`CREATE USER 'user'@'localhost' IDENTIFIED BY 'user';`
+
+`GRANT ALL ON *.* to 'user'@'localhost';`
+
+Réaliser la combinaison CTRL + D, puis : 
+
+`mysql -u root -p yoga < script.sql`
+
+## Installer API back-end : 
+
+Depuis un terminal ou depuis vscode cloner le dossier distant https://github.com/ZaeRon007/Projet6.git
+
+Monter dans le répertoire : `cd Projet6/back`
+
+Enfin, compilez l'application : `mvn compile`
+
+## Installer API Front-end : 
+
+Monter dans le répertoire : `cd Projet6/front`
+
+Enfin, installez les dépendances de l'application : `npm install`
+
+# Lancer l'application : 
+
+Pour lancer l'application il est nécessaire de démarrer l'API front-end ainsi que le back-end.
+
+## Lancer API back-end : 
+
+`cd Projet6/back`
+
+`mvn spring-boot:run` ou `./launch.sh`
+
+## Lancer API front-end : 
+
+`cd Projet6/front`
+
+`ng serve` ou `./launch.sh`
