@@ -28,8 +28,8 @@
 
     <div class="commentsList">
         <h2>Commentaires</h2>
-        <div *ngIf="comments.length != 0">
-            <mat-card class="comments" *ngFor="let com of comments">
+        <div *ngIf="comments$.value.length">
+            <mat-card class="comments" *ngFor="let com of comments$.value">
                 <mat-card-subtitle>
                     <p class="capitalized">{{com.user}}</p>
                 </mat-card-subtitle>

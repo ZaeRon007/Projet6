@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.openclassrooms.mddapi.model.CommentEntity;
+import com.openclassrooms.mddapi.model.dto.CommentDto;
 import com.openclassrooms.mddapi.repository.CommentRepository;
 
 @Service
@@ -17,14 +18,20 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
-    public CommentEntity commentArticle(int article_id, String content) throws ParseException {
+    public CommentDto commentArticle(int article_id, String content) throws ParseException {
+        CommentDto commentToReturn = new CommentDto();
         int userId = userService.getMe().getId();
-        CommentEntity commentEntity = new CommentEntity();
-        commentEntity.setArticleId(article_id);
-        commentEntity.setContent(content);
-        commentEntity.setUserId(userId);
+        CommentEntity commentToSave = new CommentEntity();
+        commentToSave.setArticleId(article_id);
+        commentToSave.setContent(content);
+        commentToSave.setUserId(userId);
 
-        return commentRepository.save(commentEntity);
+        commentToReturn.setContent(content);
+        commentToReturn.setUser(userService.getMe().getName());
+
+        commentRepository.save(commentToSave);
+
+        return commentToReturn;
     }
 
     public Iterable<CommentEntity> getCommentsByArticleId(int id) {

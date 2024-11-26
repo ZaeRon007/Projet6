@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ArticleService } from '../../services/articlesService';
 import { DisplayArticle } from 'src/app/core/models/dto/displayArticle';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription, tap } from 'rxjs';
 import { CommentService } from '../../services/commentService';
 import { DisplayComment } from 'src/app/core/models/dto/displayComment';
 
@@ -13,7 +13,7 @@ import { DisplayComment } from 'src/app/core/models/dto/displayComment';
 })
 export class SingleArticleComponent implements OnInit, OnDestroy {
   article: DisplayArticle = new DisplayArticle;
-  comments: DisplayComment[] = [];
+  comments$ = new BehaviorSubject<DisplayComment[]>([]);
   comment: DisplayComment = new DisplayComment();
   private articleSubscription: Subscription = new Subscription();
   private commentSubscription: Subscription = new Subscription();
@@ -32,13 +32,18 @@ export class SingleArticleComponent implements OnInit, OnDestroy {
       this.article = displayArticle;
     });
 
-    this.commentSubscription = this.commentService.getCommentsByArticleId(Number.parseInt(this.ID!)).subscribe((response: DisplayComment[]) => {
-      this.comments = response;
-    })
+    this.commentSubscription = this.commentService.getCommentsByArticleId(Number.parseInt(this.ID!)).pipe(
+      tap(comment => this.comments$.next(comment))).subscribe();
   }
 
   onSubmit(): void {
-    this.commentCreationSubscription = this.commentService.postComment(Number.parseInt(this.ID!), this.comment.content).subscribe();
+    this.commentCreationSubscription = this.commentService.postComment(Number.parseInt(this.ID!), this.comment.content).subscribe((newComment: DisplayComment) => {
+      const updatedComments = this.comments$.getValue();
+      updatedComments.push(newComment);
+      this.comments$.next(updatedComments);
+
+      this.comment = new DisplayComment();
+    });
   }
 
   ngOnDestroy(): void {
@@ -47,6 +52,6 @@ export class SingleArticleComponent implements OnInit, OnDestroy {
       this.commentCreationSubscription.unsubscribe();
   }
 
-  
+
 
 }
