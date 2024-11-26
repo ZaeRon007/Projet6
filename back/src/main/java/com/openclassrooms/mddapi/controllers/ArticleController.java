@@ -42,7 +42,7 @@ public class ArticleController {
 
     @PostMapping("/subscribe/{id}")
     public ResponseEntity<?> subscribeToArticle(@PathVariable String id) throws ParseException{
-        articleService.subscribeToArticle(id);
+        articleService.subscribeToTheme(id);
         return ResponseEntity.ok().body(null);
     }
 
@@ -53,7 +53,7 @@ public class ArticleController {
 
     @PostMapping("/unsubscribe/{id}")
     public ResponseEntity<?> unsubscribeToArticle(@PathVariable String id) throws ParseException{
-        articleService.unsubscribeToArticle(id);
+        articleService.unsubscribeToTheme(id);
         return ResponseEntity.ok().body(null);
     }
 

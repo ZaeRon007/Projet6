@@ -23,6 +23,12 @@ public class ArticleService {
     @Autowired
     private UserService userService;
 
+    /**
+     * Create an article
+     * @param article a model containing required informations
+     * @return ArticleEntity : an article
+     * @throws ParseException
+     */
     public ArticleEntity createArticle(ArticleDto article) throws ParseException {
         int userId = userService.getMe().getId();
         ArticleEntity articleToSave = new ArticleEntity(article.getTitle(),
@@ -34,20 +40,39 @@ public class ArticleService {
         return articleToSave;
     }
 
+    /**
+     * Get an article by its id
+     * @param id
+     * @return ArticleEntity : the wanted article
+     */
     public Optional<ArticleEntity> getArticleById(String id) {
         return articleRepository.findById(Integer.parseInt(id));
     }
 
+    /**
+     * Get all articles
+     * @return a list of ArticleEntity
+     */
     public Iterable<ArticleEntity> getAllArticles() {
         return articleRepository.findAll();
     }
 
+    /**
+     * Get all subscribes for logged user
+     * @return a list of UserSubscribesEntity
+     * @throws ParseException
+     */
     public Iterable<UserSubscribesEntity> getAllSubscribes() throws ParseException {
         int userId = userService.getMe().getId();
         return userSubscribesRepository.findAllByUserId(String.valueOf(userId));
     }
 
-    public void subscribeToArticle(String id) throws ParseException {
+    /**
+     * Permit to subscribe to a theme
+     * @param id theme id
+     * @throws ParseException
+     */
+    public void subscribeToTheme(String id) throws ParseException {
         int userId = userService.getMe().getId();
         UserSubscribesEntity userSubscribesEntity = new UserSubscribesEntity();
         userSubscribesEntity.setUserId(String.valueOf(userId));
@@ -55,15 +80,31 @@ public class ArticleService {
         userSubscribesRepository.save(userSubscribesEntity);
     }
 
-    public void unsubscribeToArticle(String id) throws ParseException {
+    /**
+     * Permit to unsubscribe to a theme
+     * @param id theme id
+     * @throws ParseException
+     */
+    public void unsubscribeToTheme(String id) throws ParseException {
         int userId = userService.getMe().getId();
         userSubscribesRepository.delete(userSubscribesRepository.findByUserIdAndThemeId(String.valueOf(userId), id));
     }
 
+    /**
+     * Get all articles corresponding to a theme id
+     * @param id theme id
+     * @return Optional<ArticleEntity[]> : a list of ArticleEntity
+     */
     public Optional<ArticleEntity[]> getArticlesByThemeId(String id) {
         return articleRepository.findAllByThemeId(Integer.parseInt(id));
     }
 
+    /**
+     * Get a boolean showing if user susbcribed to a theme
+     * @param id theme id
+     * @return boolean
+     * @throws ParseException
+     */
     public boolean isSubscribedToTheme(String id) throws ParseException {
         int userId = userService.getMe().getId();
         return userSubscribesRepository.existsByUserIdAndThemeId(String.valueOf(userId), id) ;

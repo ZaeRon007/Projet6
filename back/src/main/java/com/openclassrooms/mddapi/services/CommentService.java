@@ -18,6 +18,13 @@ public class CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    /**
+     * Allow user to comment an Article
+     * @param article_id article id to comment
+     * @param content text to post
+     * @return CommentDto : already transformed CommentEntity for front-end
+     * @throws ParseException
+     */
     public CommentDto commentArticle(int article_id, String content) throws ParseException {
         CommentDto commentToReturn = new CommentDto();
         int userId = userService.getMe().getId();
@@ -34,6 +41,11 @@ public class CommentService {
         return commentToReturn;
     }
 
+    /**
+     * Get all comments from an article id
+     * @param id article id
+     * @return Iterable<CommentEntity>: a list of CommentEntity
+     */
     public Iterable<CommentEntity> getCommentsByArticleId(int id) {
         return commentRepository.findAllByArticleId(id);
     }

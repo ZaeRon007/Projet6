@@ -14,10 +14,19 @@ public class ThemeService {
     @Autowired
     private ThemeRepository themeRepository;
 
+    /**
+     * Get all themes from database
+     * @return Iterable<ThemeEntity> : a list of ThemeEntity
+     */
     public Iterable<ThemeEntity> getThemes(){
         return themeRepository.findAll();
     }
 
+    /**
+     * Get a specific theme by an id
+     * @param id
+     * @return Optional<ThemeEntity> : a specific theme
+     */
     public Optional<ThemeEntity> getThemeById(int id) {
         return themeRepository.findById(id);
     }
