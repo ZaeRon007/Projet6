@@ -11,26 +11,45 @@ export class UserService {
     private apiUrl = environment.baseUrl;
     private user$ = new BehaviorSubject<userEntity>(new userEntity);
 
-    constructor(private http: HttpClient){}
-    
+    constructor(private http: HttpClient) { }
+
+    /**
+     * Get user by its id
+     * @param id : user id
+     * @returns Observable<userEntity>
+     */
     public getUserById(id: Number): Observable<userEntity> {
         return this.http.get<userEntity>(`${this.apiUrl}user/` + id).pipe(
             tap(user => this.user$.next(user)));
     }
 
+    /**
+     * Get User name by its id
+     * @param id : user id 
+     * @returns Observable<string>
+     */
     public getUsernameById(id: Number): Observable<string> {
         return this.getUserById(id).pipe(
             map(user => user.name)
         );
     }
 
-    public getMe() {
+    /**
+     * Get connected user profile
+     * @returns Observable<userEntity>
+     */
+    public getMe(): Observable<userEntity> {
         return this.http.get<userEntity>(`${this.apiUrl}auth/me`);
     }
 
-    public updateMe(user: userEntity) {
+    /**
+     * Update user credentials
+     * @param user : user credentials
+     * @returns Observable<userEntity>
+     */
+    public updateMe(user: userEntity): Observable<userEntity> {
         return this.http.put<userEntity>(`${this.apiUrl}profile/me`, user);
     }
 
-    
+
 }

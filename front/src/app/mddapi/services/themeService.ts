@@ -10,38 +10,62 @@ import { ArticleService } from "./articlesService";
 @Injectable({
     providedIn: 'root'
 })
-export class ThemeService implements OnInit{
+export class ThemeService implements OnInit {
     private apiUrl = environment.baseUrl;
     private themes$ = new BehaviorSubject<themeEntity[]>([new themeEntity]);
     private theme$ = new BehaviorSubject<themeEntity>(new themeEntity);
 
-    constructor(private http: HttpClient){}
+    constructor(private http: HttpClient) { }
 
     ngOnInit(): void {
         this.fetch();
     }
 
+    /**
+     * Get all themes
+     * @returns Observable<themeEntity[]>
+     */
     public fetch(): Observable<themeEntity[]> {
         return this.http.get<themeEntity[]>(`${this.apiUrl}themes`).pipe(
             tap(themes => this.themes$.next(themes)));
     }
 
+    /**
+     * Get theme by id
+     * @param id : theme id
+     * @returns Observable<themeEntity>
+     */
     public getThemeById(id: Number): Observable<themeEntity> {
         return this.http.get<themeEntity>(`${this.apiUrl}theme/` + id).pipe(
             tap(theme => this.theme$.next(theme)));
     }
 
+    /**
+     * Get theme name by id
+     * @param id : theme id
+     * @returns Observable<string>
+     */
     public getThemeNameById(id: Number): Observable<string> {
         return this.getThemeById(id).pipe(
             map(theme => theme.name)
         );
     }
 
-    public subscribeToTheme(id: number){
+    /**
+     * Subscribe to a theme
+     * @param id : theme id
+     * @returns Observable<void>
+     */
+    public subscribeToTheme(id: number): Observable<void> {
         return this.http.post<void>(`${this.apiUrl}subscribe/` + id, null);
     }
 
-    public unSubscribeToTheme(id: number){
+    /**
+     * Unsubscribe to a theme
+     * @param id : theme id
+     * @returns Observable<void>
+     */
+    public unSubscribeToTheme(id: number): Observable<void> {
         return this.http.post<void>(`${this.apiUrl}unsubscribe/` + id, null);
     }
 }

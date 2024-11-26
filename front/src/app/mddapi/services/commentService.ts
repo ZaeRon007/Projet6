@@ -11,11 +11,15 @@ import { DisplayComment } from "src/app/core/models/dto/displayComment";
 })
 export class CommentService {
     private apiUrl = environment.baseUrl;
-    private comments$ = new BehaviorSubject<CommentEntity[]>([new CommentEntity]);
 
     constructor(private http: HttpClient,
         private userService: UserService) { }
 
+    /**
+     * Get all comments by an article id
+     * @param id : article id
+     * @returns Observable<CommentEntity[]>
+     */
     public getCommentsByArticleId(id: number): Observable<DisplayComment[]> {
         return this.http.get<CommentEntity[]>(`${this.apiUrl}comment/article/` + id).pipe(
             switchMap((comments: CommentEntity[]) => {
@@ -33,6 +37,12 @@ export class CommentService {
         );
     }
 
+    /**
+     * Post a new comment
+     * @param id : article id
+     * @param content : content of comment
+     * @returns Observable<DisplayComment>
+     */
     public postComment(id: number, content: string): Observable<DisplayComment> {
         return this.http.post<DisplayComment>(`${this.apiUrl}comment/article/` + id, content)
     }

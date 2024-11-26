@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { AuthRequest } from "../models/auth.interface";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { environment } from "src/environments/environment";
+import { Observable } from "rxjs";
 
 @Injectable({
     providedIn: 'root'
@@ -12,45 +13,74 @@ export class AuthService {
     param: string = 'access_token';
 
     constructor(private router: Router,
-                private http: HttpClient){
+        private http: HttpClient) {
     }
 
-    getToken(){
+    /**
+     * Get user token
+     * @returns token string
+     */
+    getToken() {
         return localStorage.getItem(this.param);
     }
-    
+
+    /**
+     * Set user token
+     * @param token token to set
+     */
     setToken(token: string) {
         localStorage.setItem(this.param, token);
     }
 
-    isLoggedIn() : boolean {
-        if(this.getToken()){
+    /**
+     * Use to know if user is connected
+     * @returns boolean
+     */
+    isLoggedIn(): boolean {
+        if (this.getToken()) {
             return true;
         }
-        
+
         return false;
     }
 
-    isLoggedOut() : boolean {
-        if(this.getToken() == null){
+    /**
+     * Use to know if user is disconnected
+     * @returns boolean
+     */
+    isLoggedOut(): boolean {
+        if (this.getToken() == null) {
             return true;
         }
         return false;
     }
 
-    logOut(){
+    /**
+     * Force user logOut
+     */
+    logOut() {
         let removeItem = localStorage.removeItem(this.param);
-        if( removeItem == null)
+        if (removeItem == null)
             this.router.navigateByUrl('');
     }
 
-    registerUser(user: AuthRequest) {
+    /**
+     * Permit to register a new user
+     * @param user : user credentials
+     * @returns Observable<AuthRequest>
+     */
+    registerUser(user: AuthRequest): Observable<AuthRequest> {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.post<AuthRequest>(`${this.apiUrl}auth/register`, user, {headers});
+        return this.http.post<AuthRequest>(`${this.apiUrl}auth/register`, user, { headers });
     }
 
-    loginUser(user: AuthRequest) {
+    /**
+     * Permit to login user
+     * @param user : user credentials
+     * @returns Observable<AuthRequest>
+     */
+    loginUser(user: AuthRequest): Observable<AuthRequest> {
         const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-        return this.http.post<AuthRequest>(`${this.apiUrl}auth/login`, user, {headers});
+        return this.http.post<AuthRequest>(`${this.apiUrl}auth/login`, user, { headers });
     }
 }

@@ -13,133 +13,174 @@ import { DisplayThemes } from "src/app/core/models/dto/displayTheme";
 import { themeEntity } from "src/app/core/models/themeEntity";
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class ArticleService {
-    private apiUrl = environment.baseUrl;
-    private articles$ = new BehaviorSubject<ArticleEntity[]>([new ArticleEntity]);
-    private article$ = new BehaviorSubject<ArticleEntity>(new ArticleEntity);
-    private subscribes$ = new BehaviorSubject<SubscribeEntity[]>([new SubscribeEntity]);
+  private apiUrl = environment.baseUrl;
+  private articles$ = new BehaviorSubject<ArticleEntity[]>([new ArticleEntity]);
+  private article$ = new BehaviorSubject<ArticleEntity>(new ArticleEntity);
+  private subscribes$ = new BehaviorSubject<SubscribeEntity[]>([new SubscribeEntity]);
 
-    constructor(private http: HttpClient,
-                private userService: UserService,
-                private themeService: ThemeService) { }
+  constructor(private http: HttpClient,
+    private userService: UserService,
+    private themeService: ThemeService) { }
 
-    public getArticleById(id: number): Observable<ArticleEntity> {
-        return this.http.get<ArticleEntity>(`${this.apiUrl}article/` + id).pipe(
-            tap(article => this.article$.next(article))
-        );
-    }
+  /**
+   * Get an article by its id
+   * @param id : article id
+   * @returns Observable<ArticleEntity>
+   */
+  public getArticleById(id: number): Observable<ArticleEntity> {
+    return this.http.get<ArticleEntity>(`${this.apiUrl}article/` + id).pipe(
+      tap(article => this.article$.next(article))
+    );
+  }
 
-    public getAllSubscribes(): Observable<SubscribeEntity[]> {
-        return this.http.get<SubscribeEntity[]>(`${this.apiUrl}subscribes`).pipe(
-            tap(themes => this.subscribes$.next(themes))
+  /**
+   * Get all subscribes for connected user
+   * @returns Observable<SubscribeEntity[]>
+   */
+  public getAllSubscribes(): Observable<SubscribeEntity[]> {
+    return this.http.get<SubscribeEntity[]>(`${this.apiUrl}subscribes`).pipe(
+      tap(themes => this.subscribes$.next(themes))
+    )
+  }
+
+  /**
+   * Get all articles for a theme
+   * @param id : theme id
+   * @returns Observable<ArticleEntity[]>
+   */
+  public getArticlesByThemeId(id: number): Observable<ArticleEntity[]> {
+    return this.http.get<ArticleEntity[]>(`${this.apiUrl}subscribes/theme/` + id).pipe(
+      tap(article => this.articles$.next(article))
+    );
+  }
+
+  /**
+   * Use to know if connected user subscribed to theme
+   * @param id : theme id 
+   * @returns Observable<boolean>
+   */
+  public isSubscribedToTheme(id: number): Observable<boolean> {
+    return this.http.get<boolean>(`${this.apiUrl}subscribe/` + id);
+  }
+
+  /**
+   * Build a DisplayArticle from article id
+   * @param id : article id
+   * @returns Observable<DisplayArticle>
+   */
+  public setupSingleArticle(id: string): Observable<DisplayArticle> {
+    return this.getArticleById(Number.parseInt(id)).pipe(
+
+      switchMap((article: ArticleEntity) => this.userService.getUsernameById(article.userId).pipe(
+
+        switchMap(username => this.themeService.getThemeNameById(article.themeId).pipe(
+
+          map(themeName => {
+            const displayArticle: DisplayArticle = new DisplayArticle();
+            displayArticle.id = article.id;
+            displayArticle.title = article.title;
+            displayArticle.content = article.content;
+            displayArticle.date = article.createdAt;
+            displayArticle.theme = themeName;
+            displayArticle.user = username;
+            return displayArticle;
+          })
         )
-    }
-
-    public getArticlesByThemeId(id: number): Observable<ArticleEntity[]>{
-        return this.http.get<ArticleEntity[]>(`${this.apiUrl}subscribes/theme/` + id).pipe(
-            tap(article => this.articles$.next(article))
-        );
-    }
-
-    public isSubscribedToTheme(id: number) {
-      return this.http.get<boolean>(`${this.apiUrl}subscribe/` + id);
-    }
-
-    public setupSingleArticle(id: string) {
-        return this.getArticleById(Number.parseInt(id)).pipe(
-              
-              switchMap((article: ArticleEntity) => this.userService.getUsernameById(article.userId).pipe(
-      
-                    switchMap(username => this.themeService.getThemeNameById(article.themeId).pipe(
-      
-                        map(themeName => {
-                          const displayArticle: DisplayArticle = new DisplayArticle();
-                          displayArticle.id = article.id;
-                          displayArticle.title = article.title;
-                          displayArticle.content = article.content;
-                          displayArticle.date = article.createdAt;
-                          displayArticle.theme = themeName;
-                          displayArticle.user = username;
-                          return displayArticle; 
-                        })
-                      )
-                    )
-                  )
-              )
-          )
-    }
-
-    public setupArticles(){
-        return this.getAllSubscribes().pipe(
-            switchMap((subscriptions: SubscribeEntity[]) => {
-              const subscriptions$ = subscriptions.map(subscription => this.getArticlesByThemeId(subscription.themeId).pipe(
-                
-                switchMap((articles: ArticleEntity[]) => {
-                  const displayArticle$ = articles.map(article => this.userService.getUsernameById(article.userId).pipe(
-                    map(username => {
-                      const displayArticle: DisplayArticle = new DisplayArticle();
-                      displayArticle.id = article.id;
-                      displayArticle.title = article.title;
-                      displayArticle.content = article.content;
-                      displayArticle.date = article.createdAt;
-                      displayArticle.user = username;
-                      return displayArticle;
-                    })
-                  ));
-                  return forkJoin(displayArticle$);
-                })
-              ));
-              return forkJoin(subscriptions$);
-      
-            }),
-            map((nestedArticles: DisplayArticle[][]) => {
-              return nestedArticles.flat();
-            })
-          ); 
-    }
-
-    public createArticle(article: CreateArticle) {
-        return this.http.post<CreateArticle>(`${this.apiUrl}article`, article)
-    }
-
-    public setupThemeSubscriptionDisplay() {
-        return this.getAllSubscribes().pipe(
-            switchMap((response: SubscribeEntity[]) => {
-              const displayThemes$ = response.map(theme => 
-                this.themeService.getThemeById(theme.themeId).pipe(
-                  map(res => {
-                    const displayThemes: DisplayThemes = new DisplayThemes();
-                    displayThemes.id = res.id;
-                    displayThemes.title = res.name;
-                    displayThemes.content = res.content;
-                    return displayThemes;
-                  })
-                )
-              );
-            return forkJoin(displayThemes$);
-            })
-          );
-    }
-
-    public setupDisplayThemes() {
-      return this.themeService.fetch().pipe(
-        switchMap((themes: themeEntity[]) => {
-          const themes$ = themes.map(theme => this.isSubscribedToTheme(theme.id).pipe(
-
-            map(truth => {
-              const displayTheme: DisplayThemes = new DisplayThemes();
-              displayTheme.id = theme.id;
-              displayTheme.title = theme.name;
-              displayTheme.content = theme.content;
-              displayTheme.subscribed = truth;
-              return displayTheme;
-            })
-            
-          ));
-          return forkJoin(themes$);
-        })
+        )
       )
-    }
+      )
+    )
+  }
+
+  /**
+   * Build all DisplayArticle by user subscribes
+   * @returns Observable<DisplayArticle[]>
+   */
+  public setupArticles(): Observable<DisplayArticle[]> {
+    return this.getAllSubscribes().pipe(
+      switchMap((subscriptions: SubscribeEntity[]) => {
+        const subscriptions$ = subscriptions.map(subscription => this.getArticlesByThemeId(subscription.themeId).pipe(
+
+          switchMap((articles: ArticleEntity[]) => {
+            const displayArticle$ = articles.map(article => this.userService.getUsernameById(article.userId).pipe(
+              map(username => {
+                const displayArticle: DisplayArticle = new DisplayArticle();
+                displayArticle.id = article.id;
+                displayArticle.title = article.title;
+                displayArticle.content = article.content;
+                displayArticle.date = article.createdAt;
+                displayArticle.user = username;
+                return displayArticle;
+              })
+            ));
+            return forkJoin(displayArticle$);
+          })
+        ));
+        return forkJoin(subscriptions$);
+
+      }),
+      map((nestedArticles: DisplayArticle[][]) => {
+        return nestedArticles.flat();
+      })
+    );
+  }
+
+  /**
+   * Permit to create an article
+   * @param article : article informations
+   * @returns Observable<CreateArticle>
+   */
+  public createArticle(article: CreateArticle): Observable<CreateArticle> {
+    return this.http.post<CreateArticle>(`${this.apiUrl}article`, article)
+  }
+
+  /**
+   * Build all DisplayTheme for me component
+   * @returns Observable<DisplayThemes[]>
+   */
+  public setupThemeSubscriptionDisplay(): Observable<DisplayThemes[]> {
+    return this.getAllSubscribes().pipe(
+      switchMap((response: SubscribeEntity[]) => {
+        const displayThemes$ = response.map(theme =>
+          this.themeService.getThemeById(theme.themeId).pipe(
+            map(res => {
+              const displayThemes: DisplayThemes = new DisplayThemes();
+              displayThemes.id = res.id;
+              displayThemes.title = res.name;
+              displayThemes.content = res.content;
+              return displayThemes;
+            })
+          )
+        );
+        return forkJoin(displayThemes$);
+      })
+    );
+  }
+
+  /**
+   * Build all DisplayTheme for theme component
+   * @returns Observable<DisplayThemes[]>
+   */
+  public setupDisplayThemes(): Observable<DisplayThemes[]> {
+    return this.themeService.fetch().pipe(
+      switchMap((themes: themeEntity[]) => {
+        const themes$ = themes.map(theme => this.isSubscribedToTheme(theme.id).pipe(
+
+          map(truth => {
+            const displayTheme: DisplayThemes = new DisplayThemes();
+            displayTheme.id = theme.id;
+            displayTheme.title = theme.name;
+            displayTheme.content = theme.content;
+            displayTheme.subscribed = truth;
+            return displayTheme;
+          })
+
+        ));
+        return forkJoin(themes$);
+      })
+    )
+  }
 }
