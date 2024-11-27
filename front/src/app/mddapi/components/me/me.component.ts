@@ -58,8 +58,11 @@ export class MeComponent implements OnInit, OnDestroy {
   
 
   isFormValid(): boolean{
-    return this.user.name != this.originalUsername || 
-          this.user.email != this.originalEmail;
+    return (this.user.name != "" && 
+            this.user.email != "") &&
+
+          ( this.user.name != this.originalUsername || 
+            this.user.email != this.originalEmail); 
   }
 
   ngOnDestroy(): void {
