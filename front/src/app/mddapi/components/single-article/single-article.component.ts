@@ -37,13 +37,15 @@ export class SingleArticleComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(): void {
-    this.commentCreationSubscription = this.commentService.postComment(Number.parseInt(this.ID!), this.comment.content).subscribe((newComment: DisplayComment) => {
-      const updatedComments = this.comments$.getValue();
-      updatedComments.push(newComment);
-      this.comments$.next(updatedComments);
-
-      this.comment = new DisplayComment();
-    });
+    if(!!this.comment.content){
+      this.commentCreationSubscription = this.commentService.postComment(Number.parseInt(this.ID!), this.comment.content).subscribe((newComment: DisplayComment) => {
+        const updatedComments = this.comments$.getValue();
+        updatedComments.push(newComment);
+        this.comments$.next(updatedComments);
+  
+        this.comment = new DisplayComment();
+      });
+    }
   }
 
   ngOnDestroy(): void {

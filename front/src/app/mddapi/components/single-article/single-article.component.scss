@@ -46,6 +46,7 @@
             gap: 1rem;
             padding: 0;
             padding-bottom: 1rem;
+            padding-right: 4.5rem;
 
             .mat-card-subtitle {
                 width: 100px;
@@ -57,19 +58,12 @@
                 width: 100%;
                 background-color: rgb(245, 245, 245);
             }
-
-            .overHeight {
-                height: 50px;
-            }
-
         }
-
     }
 
     .commentArticle {
         display: flex;
         justify-content: center;
-        margin-top: 2rem;
 
         mat-form-field,
         .mat-form-field-infix,
@@ -92,6 +86,8 @@
 
             ::ng-deep .mat-form-field-appearance-outline .mat-form-field-outline {
                 color: black;
+                // border-radius: 32px;
+
             }
 
             .send {
