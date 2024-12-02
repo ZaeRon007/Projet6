@@ -30,6 +30,12 @@ public class mddapiSecurityConfig {
     @Autowired
     private CustomUserDetailsService customUserDetailsService;
 	
+	/**
+	 * Fonction permettant de configurer une chaine de filtre : 
+	 * - Le Cross Origin Platform est activé avec les paramètres par défaut
+	 * - Les routes "/api/auth/* sont publiques et le reste est privé (nécessite une authentification)"
+	 * - Oauth2 est configuré pour utiliser jwt comme méthode d'authentification (Json Web Token)
+	 */
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http
@@ -45,21 +51,37 @@ public class mddapiSecurityConfig {
 			.build();
 	}
 
+	/**
+	 * Encode un Json Web Token via la clé de sécurité configurée
+	 */
 	@Bean
 	public JwtEncoder jwtEncoder() {
 		return new NimbusJwtEncoder(new ImmutableSecret<>(jwtSecretKey));
 	}
 
+	/**
+	 * Décode un Json Web Token via la clé de sécurité configurée
+	 */
 	@Bean
 	public JwtDecoder jwtDecoder() {
 		return NimbusJwtDecoder.withSecretKey(jwtSecretKey).macAlgorithm(MacAlgorithm.HS256).build();
 	}
 
+	/**
+	 * Encode un mot de passe avec BCryptPasswordEncoder
+	 */
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
+
+	/**
+	 * Fonction permettant de configuer et retourner une instance d'auhtenticationManager pour gérer les authentications dans l'application
+	 * @param httpSecurity
+	 * @param passwordEncoder
+	 * @return retourne une instance d'auhtenticationManager 
+	 */
 	@Bean
 	public AuthenticationManager authenticationManager(HttpSecurity httpSecurity, PasswordEncoder passwordEncoder) throws Exception {
 		AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity.getSharedObject(AuthenticationManagerBuilder.class);
