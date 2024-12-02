@@ -13,7 +13,7 @@ import { DisplayArticle } from 'src/app/core/models/dto/displayArticle';
 export class ArticlesComponent implements OnInit, OnDestroy {
   articles: DisplayArticle[] = [];
   private sub: Subscription = new Subscription();
-  ascendant: boolean = true;
+  ascendant: boolean = false;
 
   constructor(private router: Router,
               private articleService: ArticleService) { }
