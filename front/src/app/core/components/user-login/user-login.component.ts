@@ -1,6 +1,6 @@
 import { Component, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { catchError, Subscription, throwError } from 'rxjs';
 import { AuthRequest } from '../../models/auth.interface';
 import { AuthService } from '../../services/auth.service';
 
@@ -34,15 +34,17 @@ export class UserLoginComponent implements OnDestroy {
 
   onSubmit(): void {
     this.setupAuthReq()
-    this.logInSubscription = this.authService.loginUser(this.user).subscribe((response: any) => {
-      this.authService.setToken(response.token);
-      this.router.navigateByUrl('/articles/home');
-    },
-      (error: any) => {
+    this.logInSubscription = this.authService.loginUser(this.user).pipe(
+      catchError((error) => {
         if (error.status == 400 || error.status == 401) {
           this.showError = true;
         }
-      });
+        return throwError(() => error);
+      })
+    ).subscribe((response: any) => {
+      this.authService.setToken(response.token);
+      this.router.navigateByUrl('/articles/home');
+    });
   }
 
   ngOnDestroy(): void {
