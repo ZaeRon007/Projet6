@@ -38,7 +38,7 @@ public class UserController {
         String token = userService.login(userLoginDto);
 
         if(token.isEmpty())
-            return ResponseEntity.badRequest().body("Username or Password in invalid !");
+            return ResponseEntity.badRequest().body("Username or Password is invalid !");
 
         return ResponseEntity.ok().body(new simpleToken(token));
     }

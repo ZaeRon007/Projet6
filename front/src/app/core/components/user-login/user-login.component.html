@@ -23,6 +23,10 @@
                     <input matInput [(ngModel)]="user.password" type="password" name="password">
                 </mat-form-field>
 
+                <p *ngIf="showError" class="error">
+                    Username or password is invalid !
+                </p>
+
                 <button mat-flat-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!isFormValid()">
                     Se connecter
                 </button>
