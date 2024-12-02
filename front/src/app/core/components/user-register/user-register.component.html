@@ -27,6 +27,10 @@
                     <mat-label>Mot de passe</mat-label>
                     <input matInput [(ngModel)]="user.password" type="password" name="password">
                 </mat-form-field>
+
+                <p *ngIf="showError" class="error">
+                    L'adresse E-mail existe déjà !
+                </p>
     
                 <button mat-flat-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!isFormValid()">
                     S'inscrire

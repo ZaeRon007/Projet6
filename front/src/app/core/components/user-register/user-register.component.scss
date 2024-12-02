@@ -46,6 +46,14 @@
             .flex-column {
                 display: grid;
             }
+
+            .error {
+                display: flex;
+                justify-content: center;
+                color: red;
+                width: 250px;
+                margin-top: -10px;
+            }
         }
     }
 }
